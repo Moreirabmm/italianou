@@ -1,0 +1,2851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nossa Viagem dos Sonhos à Itália 🇮🇹 • Checklist Supremo & Guia a Dois</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            terracotta: {
+              50: '#fdf7f4',
+              100: '#fbece6',
+              200: '#f7d6ca',
+              300: '#efb4a0',
+              400: '#e48a6e',
+              500: '#d76443',
+              600: '#c34c2c',
+              700: '#9e3920',
+              800: '#7e301d',
+              900: '#672a1c',
+            },
+            olive: {
+              50: '#f5f7f4',
+              100: '#e7ece4',
+              200: '#cfdccb',
+              300: '#abc2a4',
+              400: '#84a47c',
+              500: '#64885c',
+              600: '#4e6d47',
+              700: '#3f573a',
+              800: '#344730',
+              900: '#2c3b29',
+            },
+            warmcream: '#FAF7F2',
+            espresso: '#231B15',
+            sandstone: '#EFE9E0',
+            tuscanGold: '#D4A373'
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            handwriting: ['"Caveat"', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF7F2;
+      color: #231B15;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1ebd8;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c34c2c;
+      border-radius: 4px;
+    }
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background: white !important;
+      }
+    }
+    @keyframes eqBounce {
+      0%, 100% { height: 3px; }
+      50% { height: 14px; }
+    }
+    .eq-playing .eq-bar-1 { animation: eqBounce 0.7s ease-in-out infinite; }
+    .eq-playing .eq-bar-2 { animation: eqBounce 0.5s ease-in-out infinite 0.15s; }
+    .eq-playing .eq-bar-3 { animation: eqBounce 0.8s ease-in-out infinite 0.3s; }
+    .eq-playing .eq-bar-4 { animation: eqBounce 0.6s ease-in-out infinite 0.1s; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-terracotta-200 selection:text-terracotta-900">
+
+  <!-- TOP BAR: NOTIFICATIONS, BACKUP & AMBIENCE -->
+  <header class="bg-espresso text-warmcream text-xs py-2 px-4 shadow-sm border-b border-white/10 no-print">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center bg-terracotta-500 text-white w-5 h-5 rounded-full text-[10px] font-bold">🇮🇹</span>
+        <span class="font-medium tracking-wide">La Nostra Grande Avventura • Checklist Supremo & Planejamento a Dois</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <!-- Italian Music Quick Controller -->
+        <div class="flex items-center gap-1.5 bg-white/10 hover:bg-white/15 transition px-2.5 py-1 rounded-full border border-white/15 text-amber-200">
+          <button onclick="toggleMusicPlay()" id="topMusicBtn" class="flex items-center gap-1.5 font-medium hover:text-white transition cursor-pointer">
+            <i data-lucide="play" id="topMusicIcon" class="w-3.5 h-3.5 fill-current text-amber-400"></i>
+            <span id="topMusicLabel">Música Italiana</span>
+          </button>
+          <span class="opacity-40">|</span>
+          <button onclick="openMusicLounge()" class="text-[11px] text-amber-300 hover:text-white transition underline cursor-pointer" title="Lounge Musical & Spotify">
+            Lounge 🎶
+          </button>
+        </div>
+        <span class="opacity-30">|</span>
+        <button onclick="exportData()" class="hover:text-terracotta-300 transition flex items-center gap-1 font-medium">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i> Exportar Dados
+        </button>
+        <span class="opacity-30">|</span>
+        <label class="hover:text-terracotta-300 transition cursor-pointer flex items-center gap-1 font-medium">
+          <i data-lucide="upload" class="w-3.5 h-3.5"></i> Importar
+          <input type="file" id="importFileInput" onchange="importData(event)" class="hidden" accept=".json">
+        </label>
+        <span class="opacity-30">|</span>
+        <button onclick="window.print()" class="hover:text-terracotta-300 transition flex items-center gap-1 font-medium">
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i> Imprimir
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ROMANTIC ITALIAN HERO -->
+  <section class="relative bg-gradient-to-b from-[#251711] via-[#381F15] to-[#251711] text-white pt-10 pb-14 px-4 overflow-hidden border-b-4 border-terracotta-500">
+    <!-- Tricolore Ribbon -->
+    <div class="absolute top-0 left-0 right-0 h-1.5 flex">
+      <div class="w-1/3 bg-emerald-600"></div>
+      <div class="w-1/3 bg-white"></div>
+      <div class="w-1/3 bg-rose-600"></div>
+    </div>
+    
+    <!-- Warm Mediterranean Ambient Glows -->
+    <div class="absolute -right-24 -top-24 w-96 h-96 bg-terracotta-500/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -left-24 -bottom-24 w-96 h-96 bg-olive-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+        
+        <!-- Couple & Dream Title -->
+        <div class="text-center lg:text-left space-y-3.5 max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-terracotta-200 text-xs font-semibold tracking-wider uppercase border border-white/15">
+            <span>✨ Il Grande Sogno Italiano</span>
+            <span class="w-1 h-1 bg-terracotta-400 rounded-full"></span>
+            <span>Rumo à Dolce Vita</span>
+          </div>
+          
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-white leading-tight">
+            Nossa Viagem dos Sonhos
+          </h1>
+
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-lg text-terracotta-100">
+            <span id="displayCoupleNames" class="font-handwriting text-3xl md:text-4xl text-amber-300 font-bold tracking-wide">
+              Nós Dois
+            </span>
+            <button onclick="editCoupleNames()" title="Personalizar nomes do casal" class="text-white/60 hover:text-white transition p-1 hover:bg-white/10 rounded-full no-print">
+              <i data-lucide="edit-3" class="w-4 h-4"></i>
+            </button>
+            <span class="text-white/30">•</span>
+            <span id="displayDestination" class="italic text-stone-200 text-base md:text-lg">Roma, Florença, Toscana, Veneza & Além</span>
+          </div>
+
+          <p class="text-sm md:text-base text-stone-300 font-light leading-relaxed">
+            "L'Italia è un sogno che continua a tornare per il resto della tua vita." Cada passo do nosso planejamento, do passaporte ao primeiro brinde de Chianti sob o pôr do sol toscano.
+          </p>
+
+          <!-- Grand Progress Bar -->
+          <div class="pt-2">
+            <div class="flex items-center justify-between text-xs text-stone-300 mb-1.5 font-medium">
+              <span class="flex items-center gap-1.5 text-amber-300">
+                <i data-lucide="trophy" class="w-4 h-4 text-amber-400"></i> Progresso do Checklist Supremo:
+              </span>
+              <span id="displayGrandProgressText" class="font-bold text-white text-sm">0 de 0 passos (0%)</span>
+            </div>
+            <div class="w-full bg-white/10 rounded-full h-3 p-0.5 border border-white/15 overflow-hidden">
+              <div id="grandProgressBar" class="h-full bg-gradient-to-r from-amber-400 via-terracotta-500 to-rose-500 rounded-full transition-all duration-500 shadow-sm" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Countdown & Dates Card -->
+        <div class="w-full lg:w-auto bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-3xl shadow-2xl text-center min-w-[320px]">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="text-xs font-semibold tracking-widest uppercase text-terracotta-200 flex items-center gap-1.5">
+              <i data-lucide="calendar-heart" class="w-4 h-4 text-rose-400"></i> Contagem Regressiva
+            </span>
+            <button onclick="editTripDate()" class="text-xs text-amber-300 hover:text-white underline hover:no-underline flex items-center gap-1 no-print font-medium">
+              Definir Data
+            </button>
+          </div>
+
+          <div class="grid grid-cols-4 gap-2 text-center" id="countdownContainer">
+            <div class="bg-black/40 p-2.5 rounded-2xl border border-white/10 shadow-inner">
+              <span id="countDays" class="text-2xl md:text-3xl font-bold font-serif text-white block">00</span>
+              <span class="text-[10px] uppercase tracking-wider text-stone-300">Dias</span>
+            </div>
+            <div class="bg-black/40 p-2.5 rounded-2xl border border-white/10 shadow-inner">
+              <span id="countHours" class="text-2xl md:text-3xl font-bold font-serif text-white block">00</span>
+              <span class="text-[10px] uppercase tracking-wider text-stone-300">Horas</span>
+            </div>
+            <div class="bg-black/40 p-2.5 rounded-2xl border border-white/10 shadow-inner">
+              <span id="countMinutes" class="text-2xl md:text-3xl font-bold font-serif text-white block">00</span>
+              <span class="text-[10px] uppercase tracking-wider text-stone-300">Min</span>
+            </div>
+            <div class="bg-black/40 p-2.5 rounded-2xl border border-white/10 shadow-inner">
+              <span id="countSeconds" class="text-2xl md:text-3xl font-bold font-serif text-white block">00</span>
+              <span class="text-[10px] uppercase tracking-wider text-stone-300">Seg</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-white/10 text-xs text-stone-200 flex items-center justify-center gap-2">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-terracotta-400"></i>
+            <span id="displayTripDatesRange">Embarque: A definir juntos</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Status Badges -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10">
+        <div class="bg-white/5 backdrop-blur-md border border-white/10 p-3.5 rounded-2xl flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center">
+            <i data-lucide="check-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div id="kpiCompletedSteps" class="text-base font-bold text-white">0 Passos</div>
+            <div class="text-[11px] text-stone-300">Conquistas Realizadas</div>
+          </div>
+        </div>
+
+        <div class="bg-white/5 backdrop-blur-md border border-white/10 p-3.5 rounded-2xl flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-terracotta-500/20 text-terracotta-300 flex items-center justify-center">
+            <i data-lucide="history" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div id="kpiHistoryCount" class="text-base font-bold text-white">0 Marcos</div>
+            <div class="text-[11px] text-stone-300">Histórico & Diário</div>
+          </div>
+        </div>
+
+        <div class="bg-white/5 backdrop-blur-md border border-white/10 p-3.5 rounded-2xl flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-olive-500/20 text-olive-300 flex items-center justify-center">
+            <i data-lucide="map" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div id="kpiDaysCount" class="text-base font-bold text-white">0 Dias</div>
+            <div class="text-[11px] text-stone-300">Roteiro Italiano</div>
+          </div>
+        </div>
+
+        <div class="bg-white/5 backdrop-blur-md border border-white/10 p-3.5 rounded-2xl flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-300 flex items-center justify-center">
+            <i data-lucide="euro" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div id="kpiBudgetSpend" class="text-base font-bold text-white">€ 0</div>
+            <div class="text-[11px] text-stone-300">Gastos Registrados</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="sticky top-0 z-30 bg-warmcream/95 backdrop-blur-md border-b border-stone-200 shadow-sm no-print">
+    <div class="max-w-6xl mx-auto px-4 flex space-x-2 sm:space-x-3 overflow-x-auto custom-scrollbar py-2.5">
+      
+      <!-- CHECKLIST SUPREMO TAB (HERO FEATURE) -->
+      <button onclick="switchTab('checklist-supremo')" id="tabBtn-checklist-supremo" class="nav-tab active-tab px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 whitespace-nowrap bg-terracotta-600 text-white shadow-sm">
+        <i data-lucide="list-checks" class="w-4 h-4"></i> Checklist Supremo por Fases
+      </button>
+
+      <!-- HISTÓRICO & DIÁRIO TAB -->
+      <button onclick="switchTab('historico')" id="tabBtn-historico" class="nav-tab px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 whitespace-nowrap text-stone-600 hover:bg-stone-200/60 hover:text-stone-900">
+        <i data-lucide="scroll" class="w-4 h-4"></i> Linha do Tempo & Histórico
+      </button>
+
+      <!-- ROTEIRO DIA A DIA TAB -->
+      <button onclick="switchTab('itinerario')" id="tabBtn-itinerario" class="nav-tab px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 whitespace-nowrap text-stone-600 hover:bg-stone-200/60 hover:text-stone-900">
+        <i data-lucide="map-pinned" class="w-4 h-4"></i> Roteiro Dia a Dia
+      </button>
+
+      <!-- CUSTOS & ORÇAMENTO TAB -->
+      <button onclick="switchTab('orcamento')" id="tabBtn-orcamento" class="nav-tab px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 whitespace-nowrap text-stone-600 hover:bg-stone-200/60 hover:text-stone-900">
+        <i data-lucide="wallet" class="w-4 h-4"></i> Orçamento (€ / R$)
+      </button>
+
+      <!-- GASTRONOMIA TAB -->
+      <button onclick="switchTab('gastronomia')" id="tabBtn-gastronomia" class="nav-tab px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 whitespace-nowrap text-stone-600 hover:bg-stone-200/60 hover:text-stone-900">
+        <i data-lucide="utensils" class="w-4 h-4"></i> Restaurantes & Vinhos
+      </button>
+
+      <!-- CHECKLIST DE MALAS TAB -->
+      <button onclick="switchTab('malas')" id="tabBtn-malas" class="nav-tab px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 whitespace-nowrap text-stone-600 hover:bg-stone-200/60 hover:text-stone-900">
+        <i data-lucide="luggage" class="w-4 h-4"></i> Malas & Bagagem
+      </button>
+
+      <!-- DICAS & ITALIANO TAB -->
+      <button onclick="switchTab('dicas')" id="tabBtn-dicas" class="nav-tab px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 whitespace-nowrap text-stone-600 hover:bg-stone-200/60 hover:text-stone-900">
+        <i data-lucide="sparkles" class="w-4 h-4"></i> Italiano & Dicas de Ouro
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- CONTENT CONTAINER -->
+  <main class="max-w-6xl mx-auto px-4 py-8 flex-1 w-full">
+
+    <!-- ============================================== -->
+    <!-- TAB: CHECKLIST SUPREMO COM FASES (HERO)       -->
+    <!-- ============================================== -->
+    <div id="tabContent-checklist-supremo" class="space-y-6">
+      
+      <!-- Supreme Header & Actions -->
+      <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-semibold text-terracotta-700 uppercase tracking-widest mb-1">
+            <i data-lucide="compass" class="w-4 h-4"></i> La Strada per l'Italia
+          </div>
+          <h2 class="text-2xl md:text-3xl font-serif font-bold text-espresso">Il Checklist Supremo: Passo a Passo do Sonho</h2>
+          <p class="text-sm text-stone-500 mt-1 max-w-2xl">
+            Cada fase da preparação organizada em ordem cronológica ideal, dos passaportes até o brinde em Roma. Marque os passos e veja a história de vocês sendo construída!
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 self-start md:self-center no-print flex-wrap">
+          <button onclick="playTaskCompleteSound()" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200/90 font-medium text-xs sm:text-sm px-3.5 py-2.5 rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-xs" title="Testar som que toca ao concluir tarefa">
+            <span>🎉</span> <span>Ouvir "Ah é!?"</span>
+          </button>
+          <button onclick="openAddSupremeItemModal()" class="bg-terracotta-600 hover:bg-terracotta-700 text-white font-medium text-xs sm:text-sm px-4 py-2.5 rounded-xl transition shadow flex items-center gap-2 cursor-pointer">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Novo Passo
+          </button>
+          <button onclick="resetDefaultSupremeChecklist()" class="bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium text-xs sm:text-sm px-3.5 py-2.5 rounded-xl transition flex items-center gap-1.5 cursor-pointer" title="Recarregar modelo clássico de fases">
+            <i data-lucide="refresh-cw" class="w-4 h-4 text-stone-500"></i> Restaurar Modelo
+          </button>
+        </div>
+      </div>
+
+      <!-- Filters & Phase Nav -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-stone-100/70 p-3 rounded-2xl border border-stone-200/80 text-xs no-print">
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 max-w-full">
+          <span class="font-bold text-stone-500 uppercase tracking-wider text-[11px] whitespace-nowrap mr-1">Filtrar Fase:</span>
+          <button onclick="filterSupremePhase('all')" class="phase-filter-btn active bg-stone-800 text-white font-semibold px-3 py-1.5 rounded-lg whitespace-nowrap">Todas as Fases</button>
+          <button onclick="filterSupremePhase(1)" class="phase-filter-btn bg-white text-stone-600 hover:bg-stone-200 px-3 py-1.5 rounded-lg whitespace-nowrap border border-stone-200">Fase 1: O Sonho</button>
+          <button onclick="filterSupremePhase(2)" class="phase-filter-btn bg-white text-stone-600 hover:bg-stone-200 px-3 py-1.5 rounded-lg whitespace-nowrap border border-stone-200">Fase 2: Grandes Passos</button>
+          <button onclick="filterSupremePhase(3)" class="phase-filter-btn bg-white text-stone-600 hover:bg-stone-200 px-3 py-1.5 rounded-lg whitespace-nowrap border border-stone-200">Fase 3: Ingressos & Magia</button>
+          <button onclick="filterSupremePhase(4)" class="phase-filter-btn bg-white text-stone-600 hover:bg-stone-200 px-3 py-1.5 rounded-lg whitespace-nowrap border border-stone-200">Fase 4: Reta Final</button>
+          <button onclick="filterSupremePhase(5)" class="phase-filter-btn bg-white text-stone-600 hover:bg-stone-200 px-3 py-1.5 rounded-lg whitespace-nowrap border border-stone-200">Fase 5: Véspera & Malas</button>
+          <button onclick="filterSupremePhase(6)" class="phase-filter-btn bg-white text-stone-600 hover:bg-stone-200 px-3 py-1.5 rounded-lg whitespace-nowrap border border-stone-200">Fase 6: Na Itália ❤️</button>
+        </div>
+
+        <div class="flex items-center gap-2 text-stone-600">
+          <span class="font-bold text-[11px] uppercase tracking-wider text-stone-500">Responsável:</span>
+          <select id="supremeAssigneeFilter" onchange="filterSupremeAssignee(this.value)" class="bg-white border border-stone-300 text-xs rounded-lg px-2.5 py-1 focus:ring-1 focus:ring-terracotta-500 focus:outline-none">
+            <option value="all">Todos</option>
+            <option value="Ele">👔 Ele</option>
+            <option value="Ela">👗 Ela</option>
+            <option value="Os Dois">💑 Os Dois</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Phases Container -->
+      <div id="supremePhasesContainer" class="space-y-6">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+
+    <!-- ============================================== -->
+    <!-- TAB: HISTÓRICO & LINHA DO TEMPO               -->
+    <!-- ============================================== -->
+    <div id="tabContent-historico" class="hidden space-y-6">
+      
+      <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-semibold text-olive-700 uppercase tracking-widest mb-1">
+            <i data-lucide="feather" class="w-4 h-4"></i> Diario di Bordo
+          </div>
+          <h2 class="text-2xl font-serif font-bold text-espresso">A História da Nossa Viagem (Linha do Tempo)</h2>
+          <p class="text-sm text-stone-500 mt-1 max-w-xl">
+            Cada marco conquistado e cada momento especial do casal fica registrado aqui para sempre. Adicione memórias, datas e sentimentos da nossa preparação.
+          </p>
+        </div>
+
+        <button onclick="openAddHistoryModal()" class="bg-olive-600 hover:bg-olive-700 text-white font-medium text-sm px-4 py-2.5 rounded-xl transition shadow flex items-center gap-2 self-start md:self-center no-print">
+          <i data-lucide="bookmark-plus" class="w-4 h-4"></i> Adicionar Registro ao Diário
+        </button>
+      </div>
+
+      <!-- Timeline Stream -->
+      <div class="relative border-l-2 border-stone-200 ml-4 md:ml-8 pl-6 md:pl-8 space-y-8" id="historyTimelineContainer">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+
+    <!-- ============================================== -->
+    <!-- TAB: ROTEIRO DIA A DIA                         -->
+    <!-- ============================================== -->
+    <div id="tabContent-itinerario" class="hidden space-y-6">
+      
+      <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-serif font-bold text-espresso">Nosso Itinerário pela Itália 🗺️</h2>
+          <p class="text-sm text-stone-500">Crie, edite ou reorganize os dias da viagem com manhãs, tardes e noites inesquecíveis.</p>
+        </div>
+        <div class="flex items-center gap-2 no-print">
+          <button onclick="openAddDayModal()" class="bg-terracotta-600 hover:bg-terracotta-700 text-white font-medium text-sm px-4 py-2.5 rounded-xl transition shadow flex items-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Adicionar Dia
+          </button>
+          <button onclick="loadDefaultItinerary()" class="bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium text-sm px-3 py-2.5 rounded-xl transition flex items-center gap-1.5" title="Carregar sugestão romântica de 7 dias">
+            <i data-lucide="sparkles" class="w-4 h-4 text-terracotta-500"></i> Sugestão 7 Dias
+          </button>
+        </div>
+      </div>
+
+      <!-- Days Timeline / Cards List -->
+      <div id="daysListContainer" class="space-y-4">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- TAB: CUSTOS & ORÇAMENTO                        -->
+    <!-- ============================================== -->
+    <div id="tabContent-orcamento" class="hidden space-y-6">
+      
+      <!-- Budget Summary Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm relative overflow-hidden">
+          <div class="text-xs font-semibold text-stone-400 uppercase tracking-wider">Meta / Teto do Orçamento</div>
+          <div class="flex items-baseline gap-2 mt-1">
+            <span id="budgetLimitDisplay" class="text-3xl font-serif font-bold text-espresso">€ 4.000</span>
+            <button onclick="editBudgetLimit()" class="text-xs text-terracotta-600 hover:underline no-print font-medium">Editar Meta</button>
+          </div>
+          <div class="text-xs text-stone-500 mt-2 flex items-center gap-1">
+            <span id="budgetLimitBRL">Aprox. R$ 24.000</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm">
+          <div class="text-xs font-semibold text-stone-400 uppercase tracking-wider">Total Planejado / Gasto</div>
+          <div class="flex items-baseline gap-2 mt-1">
+            <span id="budgetTotalSpent" class="text-3xl font-serif font-bold text-terracotta-600">€ 0</span>
+          </div>
+          <div class="text-xs text-stone-500 mt-2" id="budgetTotalSpentBRL">
+            Aprox. R$ 0
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm">
+          <div class="text-xs font-semibold text-stone-400 uppercase tracking-wider">Saldo Restante</div>
+          <div class="flex items-baseline gap-2 mt-1">
+            <span id="budgetRemaining" class="text-3xl font-serif font-bold text-olive-600">€ 4.000</span>
+          </div>
+          <div class="text-xs text-stone-500 mt-2">
+            Disponível para passeios e surpresas ✨
+          </div>
+        </div>
+      </div>
+
+      <!-- Currency Rate Config Banner -->
+      <div class="bg-stone-100/80 border border-stone-200/90 rounded-xl p-3 px-4 flex flex-wrap items-center justify-between gap-3 text-xs text-stone-600 no-print">
+        <div class="flex items-center gap-2">
+          <i data-lucide="refresh-cw" class="w-4 h-4 text-stone-500"></i>
+          <span>Cotação de Referência: <strong>1 € = R$ <span id="displayEuroRate">6.00</span></strong></span>
+        </div>
+        <button onclick="editEuroRate()" class="text-terracotta-700 hover:underline font-medium">
+          Ajustar Cotação do Euro
+        </button>
+      </div>
+
+      <!-- Expenses Control Section -->
+      <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-stone-100">
+          <div>
+            <h3 class="text-xl font-serif font-bold text-espresso">Despesas & Reservas</h3>
+            <p class="text-xs text-stone-500">Mantenham tudo organizado: quem pagou, o que já está pago e o que falta quitar.</p>
+          </div>
+          <button onclick="openAddExpenseModal()" class="bg-terracotta-600 hover:bg-terracotta-700 text-white font-medium text-sm px-4 py-2 rounded-xl transition flex items-center gap-1.5 self-start no-print">
+            <i data-lucide="plus" class="w-4 h-4"></i> Nova Despesa
+          </button>
+        </div>
+
+        <!-- Filter by Category -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs no-print" id="expenseCategoryFilters">
+          <button onclick="filterExpenses('all')" class="cat-filter active px-3 py-1.5 rounded-lg bg-stone-800 text-white font-medium">Todas</button>
+          <button onclick="filterExpenses('Hospedagem')" class="cat-filter px-3 py-1.5 rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200">🏨 Hospedagem</button>
+          <button onclick="filterExpenses('Passagens')" class="cat-filter px-3 py-1.5 rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200">✈️ Voos & Trens</button>
+          <button onclick="filterExpenses('Gastronomia')" class="cat-filter px-3 py-1.5 rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200">🍝 Comida & Vinho</button>
+          <button onclick="filterExpenses('Passeios')" class="cat-filter px-3 py-1.5 rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200">🎟️ Ingressos & Tours</button>
+          <button onclick="filterExpenses('Outros')" class="cat-filter px-3 py-1.5 rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200">🛍️ Outros / Compras</button>
+        </div>
+
+        <!-- Expense Items Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-xs uppercase bg-stone-50 text-stone-500 border-y border-stone-200">
+              <tr>
+                <th class="py-3 px-4">Item / Descrição</th>
+                <th class="py-3 px-3">Categoria</th>
+                <th class="py-3 px-3">Valor (€)</th>
+                <th class="py-3 px-3">Valor (R$)</th>
+                <th class="py-3 px-3">Quem Paga</th>
+                <th class="py-3 px-3">Status</th>
+                <th class="py-3 px-3 text-right no-print">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="expensesTableBody" class="divide-y divide-stone-100">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================== -->
+    <!-- TAB: GASTRONOMIA & RESTAURANTES                -->
+    <!-- ============================================== -->
+    <div id="tabContent-gastronomia" class="hidden space-y-6">
+      
+      <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-serif font-bold text-espresso">Experiências Gastronômicas & Vinhos 🍷</h2>
+          <p class="text-sm text-stone-500">Onde comer o melhor gelato, massas frescas feitas à mão e brindar ao entardecer.</p>
+        </div>
+        <div class="flex items-center gap-2 no-print">
+          <button onclick="openAddRestaurantModal()" class="bg-terracotta-600 hover:bg-terracotta-700 text-white font-medium text-sm px-4 py-2.5 rounded-xl transition shadow flex items-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Adicionar Restaurante
+          </button>
+          <button onclick="loadDefaultFoodWishlist()" class="bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium text-sm px-3 py-2.5 rounded-xl transition flex items-center gap-1.5" title="Carregar lista de desejos clássica">
+            <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i> Sugestões dos Sonhos
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Italian Dishes Mini Guide -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+        <div class="bg-amber-50 border border-amber-200/80 p-3 rounded-xl">
+          <span class="font-bold text-amber-900 block text-sm">Roma 🏛️</span>
+          <span class="text-stone-600">Cacio e Pepe, Carbonara clássica e supplì quente.</span>
+        </div>
+        <div class="bg-rose-50 border border-rose-200/80 p-3 rounded-xl">
+          <span class="font-bold text-rose-900 block text-sm">Florença / Toscana 🥩</span>
+          <span class="text-stone-600">Bistecca alla Fiorentina e taça de vinho Chianti.</span>
+        </div>
+        <div class="bg-emerald-50 border border-emerald-200/80 p-3 rounded-xl">
+          <span class="font-bold text-emerald-900 block text-sm">Veneza 🛶</span>
+          <span class="text-stone-600">Aperol Spritz com cicchetti nos bacari locais.</span>
+        </div>
+        <div class="bg-blue-50 border border-blue-200/80 p-3 rounded-xl">
+          <span class="font-bold text-blue-900 block text-sm">Nápoles / Costa 🍋</span>
+          <span class="text-stone-600">Pizza napolitana com borda alta e Limoncello gelado.</span>
+        </div>
+      </div>
+
+      <!-- Restaurants Grid -->
+      <div id="restaurantsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- TAB: CHECKLIST DE MALAS                        -->
+    <!-- ============================================== -->
+    <div id="tabContent-malas" class="hidden space-y-6">
+      
+      <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-serif font-bold text-espresso">Checklist de Malas & Bagagem 🧳</h2>
+          <p class="text-sm text-stone-500">Organização prática para o que colocar na mala de cada um e na bolsa de mão.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="openAddChecklistItemModal()" class="bg-terracotta-600 hover:bg-terracotta-700 text-white font-medium text-sm px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 no-print">
+            <i data-lucide="plus" class="w-4 h-4"></i> Adicionar Item
+          </button>
+          <button onclick="loadDefaultChecklist()" class="bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium text-sm px-3 py-2.5 rounded-xl transition flex items-center gap-1.5 no-print" title="Carregar lista completa de viagem para a Europa">
+            <i data-lucide="sparkles" class="w-4 h-4 text-emerald-600"></i> Sugestão Completa
+          </button>
+        </div>
+      </div>
+
+      <!-- Packing Categories Columns -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="checklistColumnsContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- TAB: DICAS ROMÂNTICAS & ITALIANO               -->
+    <!-- ============================================== -->
+    <div id="tabContent-dicas" class="hidden space-y-6">
+      
+      <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+        <h2 class="text-2xl font-serif font-bold text-espresso mb-2">Frases em Italiano para Usar a Dois 🇮🇹❤️</h2>
+        <p class="text-sm text-stone-500 mb-6">Pequenas frases para vocês se divertirem e falarem juntinhos nos restaurantes e praças.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="p-4 bg-terracotta-50 border border-terracotta-100 rounded-xl">
+            <div class="font-serif font-bold text-terracotta-800 text-lg">"Un tavolo per due, per favore"</div>
+            <div class="text-xs text-stone-600 mt-1">Uma mesa para dois, por favor!</div>
+            <div class="text-[10px] text-terracotta-500 font-mono mt-1">Pronúncia: un tá-vo-lo per dú-e, per fa-vô-re</div>
+          </div>
+
+          <div class="p-4 bg-rose-50 border border-rose-100 rounded-xl">
+            <div class="font-serif font-bold text-rose-800 text-lg">"Sei bellissima / Sei bellissimo"</div>
+            <div class="text-xs text-stone-600 mt-1">Você está linda / Você está lindo!</div>
+            <div class="text-[10px] text-rose-500 font-mono mt-1">Pronúncia: sei be-lís-si-ma</div>
+          </div>
+
+          <div class="p-4 bg-amber-50 border border-amber-100 rounded-xl">
+            <div class="font-serif font-bold text-amber-800 text-lg">"Due gelati con due gusti!"</div>
+            <div class="text-xs text-stone-600 mt-1">Dois sorvetes com dois sabores!</div>
+            <div class="text-[10px] text-amber-600 font-mono mt-1">Pronúncia: dú-e ge-lá-ti con dú-e gús-ti</div>
+          </div>
+
+          <div class="p-4 bg-olive-50 border border-olive-100 rounded-xl">
+            <div class="font-serif font-bold text-olive-800 text-lg">"Il conto, per favore"</div>
+            <div class="text-xs text-stone-600 mt-1">A conta, por favor.</div>
+            <div class="text-[10px] text-olive-600 font-mono mt-1">Pronúncia: il cón-to, per fa-vô-re</div>
+          </div>
+
+          <div class="p-4 bg-stone-100 border border-stone-200 rounded-xl">
+            <div class="font-serif font-bold text-stone-800 text-lg">"Posso fare una foto?"</div>
+            <div class="text-xs text-stone-600 mt-1">Pode tirar uma foto nossa?</div>
+            <div class="text-[10px] text-stone-500 font-mono mt-1">Diga a alguém simpático para guardar uma lembrança dos dois.</div>
+          </div>
+
+          <div class="p-4 bg-purple-50 border border-purple-100 rounded-xl">
+            <div class="font-serif font-bold text-purple-800 text-lg">"Ti amo da morire"</div>
+            <div class="text-xs text-stone-600 mt-1">Te amo até morrer / Te amo demais!</div>
+            <div class="text-[10px] text-purple-500 font-mono mt-1">Perfeito no pôr do sol da Ponte Vecchio ou na Fontana di Trevi.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Essential Travel Tips for Italy -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm space-y-4">
+          <h3 class="text-lg font-serif font-bold text-espresso flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i> Dicas de Ouro na Itália
+          </h3>
+          <ul class="space-y-3 text-xs text-stone-600">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-500 font-bold">✓</span>
+              <span><strong>Validar bilhete de trem:</strong> Se comprarem bilhete físico de trem regional, lembrem-se de validar na maquininha verde antes de subir a bordo para evitar multas!</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-500 font-bold">✓</span>
+              <span><strong>Código de vestimenta em igrejas:</strong> No Vaticano e na maioria das catedrais históricas (Duomo), ombros e joelhos devem estar cobertos. Leve sempre uma pashmina/lenço leve na bolsa dela.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-500 font-bold">✓</span>
+              <span><strong>Água fresca grátis:</strong> Em Roma e Florença existem fontes públicas históricas de água potável geladinha (os famosos <em>Nasoni</em>). Levem uma garrafinha reutilizável!</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-500 font-bold">✓</span>
+              <span><strong>Coperto & Serviço:</strong> Na Itália é comum a taxa de "coperto" (pão e serviço, cerca de 2€ a 4€ por pessoa) já discriminada na conta. Não é obrigatório deixar 10% a mais além disso.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm space-y-4">
+          <h3 class="text-lg font-serif font-bold text-espresso flex items-center gap-2">
+            <i data-lucide="heart" class="w-5 h-5 text-terracotta-600"></i> Momentos Mais Românticos
+          </h3>
+          <ul class="space-y-3 text-xs text-stone-600">
+            <li class="flex items-start gap-2">
+              <span class="text-terracotta-500 font-bold">❤️</span>
+              <span><strong>Fontana di Trevi à noite:</strong> Visite depois das 23h ou bem cedinho (7h da manhã) para jogarem a moeda de costas juntos sem a multidão.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-terracotta-500 font-bold">❤️</span>
+              <span><strong>Piazzale Michelangelo (Florença):</strong> Comprem uma garrafa de vinho toscano e fiquem sentados nas escadarias assistindo ao pôr do sol mais famoso do mundo.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-terracotta-500 font-bold">❤️</span>
+              <span><strong>Trastevere à luz de velas:</strong> O bairro boêmio de Roma, com ruas de paralelepípedo, varais de roupas e restaurantes com música ao vivo.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-terracotta-500 font-bold">❤️</span>
+              <span><strong>Gôndola ao entardecer em Veneza:</strong> Peçam ao gondoleiro para navegar pelos canais menores e tranquilos antes do Gran Canale.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODALS -->
+
+  <!-- Modal: Adicionar Passo ao Checklist Supremo -->
+  <div id="modalSupremeItem" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-stone-200">
+      <h3 class="text-xl font-serif font-bold text-espresso mb-1">Adicionar Passo ao Checklist Supremo</h3>
+      <p class="text-xs text-stone-500 mb-4">Insira uma tarefa ou objetivo importante para o planejamento.</p>
+      
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Em qual Fase da Viagem?</label>
+          <select id="inputSupPhase" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+            <option value="0">Fase 1: Il Sogno (12 a 6 meses antes)</option>
+            <option value="1">Fase 2: I Grandi Passi (6 a 4 meses antes)</option>
+            <option value="2">Fase 3: La Magia dei Dettagli (3 a 2 meses antes)</option>
+            <option value="3">Fase 4: Dolce Far Niente (1 mês a 2 semanas antes)</option>
+            <option value="4">Fase 5: Il Grande Momento (Última semana & Véspera)</option>
+            <option value="5">Fase 6: La Dolce Vita (Na Itália & Memórias)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Título do Passo</label>
+          <input type="text" id="inputSupTitle" placeholder="Ex: Reservar passeio de barco em Capri" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Dica / Explicação ou Detalhes</label>
+          <textarea id="inputSupDesc" rows="2" placeholder="Ex: Melhor horário é pela manhã para ver a Gruta Azul com sol." class="w-full text-sm border border-stone-300 rounded-xl p-2.5 focus:ring-2 focus:ring-terracotta-500 focus:outline-none"></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Responsável</label>
+            <select id="inputSupAssigned" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+              <option value="Os Dois">💑 Os Dois</option>
+              <option value="Ele">👔 Ele</option>
+              <option value="Ela">👗 Ela</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Prioridade</label>
+            <select id="inputSupPriority" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+              <option value="🔥 Crítico">🔥 Crítico (Não esquecer)</option>
+              <option value="⭐ Importante">⭐ Importante</option>
+              <option value="💡 Experiência">💡 Experiência Romântica</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-6">
+        <button onclick="closeModal('modalSupremeItem')" class="text-xs font-medium text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl transition">Cancelar</button>
+        <button onclick="saveSupremeItem()" class="text-xs font-semibold bg-terracotta-600 hover:bg-terracotta-700 text-white px-5 py-2 rounded-xl transition">Adicionar Passo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Adicionar Registro ao Histórico / Diário -->
+  <div id="modalHistory" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200">
+      <h3 class="text-xl font-serif font-bold text-espresso mb-1">Novo Marco no Diário da Viagem</h3>
+      <p class="text-xs text-stone-500 mb-4">Grave um momento inesquecível da preparação ou da viagem.</p>
+      
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Data do Acontecimento</label>
+          <input type="date" id="inputHistDate" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-olive-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Título do Marco</label>
+          <input type="text" id="inputHistTitle" placeholder="Ex: Passagens aéreas compradas! ✈️" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-olive-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">História / Sentimento / Anotação</label>
+          <textarea id="inputHistText" rows="3" placeholder="Ex: Conseguimos o voo que queríamos, agora é real! Brindamos com vinho para comemorar." class="w-full text-sm border border-stone-300 rounded-xl p-2.5 focus:ring-2 focus:ring-olive-500 focus:outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Autor do Registro</label>
+          <select id="inputHistAuthor" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-olive-500 focus:outline-none">
+            <option value="Casal">💑 Casal</option>
+            <option value="Ele">👔 Ele</option>
+            <option value="Ela">👗 Ela</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-6">
+        <button onclick="closeModal('modalHistory')" class="text-xs font-medium text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl transition">Cancelar</button>
+        <button onclick="saveHistoryEntry()" class="text-xs font-semibold bg-olive-600 hover:bg-olive-700 text-white px-5 py-2 rounded-xl transition">Gravar Memória</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Editar Nomes & Destino -->
+  <div id="modalCouple" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200">
+      <h3 class="text-xl font-serif font-bold text-espresso mb-1">Personalizar o Casal</h3>
+      <p class="text-xs text-stone-500 mb-4">Coloquem os nomes de vocês para deixar o site com a cara do casal!</p>
+      
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs font-semibold text-stone-700 block mb-1">Nomes do Casal</label>
+          <input type="text" id="inputCoupleNames" placeholder="Ex: Guilherme & Amor" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-stone-700 block mb-1">Destinos / Subtítulo</label>
+          <input type="text" id="inputDestination" placeholder="Ex: Roma, Florença, Veneza & Costa Amalfitana" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-6">
+        <button onclick="closeModal('modalCouple')" class="text-xs font-medium text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl transition">Cancelar</button>
+        <button onclick="saveCoupleNames()" class="text-xs font-semibold bg-terracotta-600 hover:bg-terracotta-700 text-white px-5 py-2 rounded-xl transition">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Editar Data da Viagem -->
+  <div id="modalDate" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200">
+      <h3 class="text-xl font-serif font-bold text-espresso mb-1">Data da Viagem dos Sonhos</h3>
+      <p class="text-xs text-stone-500 mb-4">Escolha o dia de embarque para ativar a contagem regressiva em tempo real.</p>
+      
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs font-semibold text-stone-700 block mb-1">Data de Início (Embarque)</label>
+          <input type="date" id="inputTripStartDate" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-stone-700 block mb-1">Data de Volta (Opcional)</label>
+          <input type="date" id="inputTripEndDate" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-6">
+        <button onclick="closeModal('modalDate')" class="text-xs font-medium text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl transition">Cancelar</button>
+        <button onclick="saveTripDates()" class="text-xs font-semibold bg-terracotta-600 hover:bg-terracotta-700 text-white px-5 py-2 rounded-xl transition">Salvar Data</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Adicionar/Editar Dia de Roteiro -->
+  <div id="modalDay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-stone-200 my-8">
+      <h3 id="modalDayTitle" class="text-xl font-serif font-bold text-espresso mb-1">Adicionar Dia de Viagem</h3>
+      <p class="text-xs text-stone-500 mb-4">Defina a cidade e os planos para manhã, tarde e noite.</p>
+      
+      <input type="hidden" id="inputDayId">
+
+      <div class="space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Número do Dia</label>
+            <input type="text" id="inputDayNumber" placeholder="Ex: Dia 1" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Data Específica (Opcional)</label>
+            <input type="text" id="inputDayDate" placeholder="Ex: 15 de Outubro" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Cidade / Região</label>
+            <input type="text" id="inputDayCity" placeholder="Ex: Roma" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Status do Dia</label>
+            <select id="inputDayStatus" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+              <option value="Planejando">🤔 Planejando</option>
+              <option value="Confirmado">✅ Confirmado</option>
+              <option value="Imperdível">⭐ Imperdível</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Título / Destaque do Dia</label>
+          <input type="text" id="inputDayHeadline" placeholder="Ex: Chegada na Cidade Eterna & Pôr do sol no Coliseu" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-1 gap-2">
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">🌅 Manhã</label>
+            <textarea id="inputDayMorning" rows="2" placeholder="Passeios matinais, café da manhã especial..." class="w-full text-sm border border-stone-300 rounded-xl p-2.5 focus:ring-2 focus:ring-terracotta-500 focus:outline-none"></textarea>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">☀️ Tarde</label>
+            <textarea id="inputDayAfternoon" rows="2" placeholder="Almoço típico, museus, caminhada romântica..." class="w-full text-sm border border-stone-300 rounded-xl p-2.5 focus:ring-2 focus:ring-terracotta-500 focus:outline-none"></textarea>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">🌙 Noite</label>
+            <textarea id="inputDayNight" rows="2" placeholder="Jantar a dois à luz de velas, taça de vinho, gelato..." class="w-full text-sm border border-stone-300 rounded-xl p-2.5 focus:ring-2 focus:ring-terracotta-500 focus:outline-none"></textarea>
+          </div>
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">💡 Dica Romântica ou Lembrete</label>
+          <input type="text" id="inputDayTip" placeholder="Ex: Reservar ingresso fura-fila com antecedência!" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-6">
+        <button onclick="closeModal('modalDay')" class="text-xs font-medium text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl transition">Cancelar</button>
+        <button onclick="saveDayItem()" class="text-xs font-semibold bg-terracotta-600 hover:bg-terracotta-700 text-white px-5 py-2 rounded-xl transition">Salvar Dia</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Adicionar Despesa -->
+  <div id="modalExpense" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200">
+      <h3 class="text-xl font-serif font-bold text-espresso mb-1">Nova Despesa da Viagem</h3>
+      <p class="text-xs text-stone-500 mb-4">Registre custos para manter o controle sem estresse.</p>
+      
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Descrição do Item</label>
+          <input type="text" id="inputExpTitle" placeholder="Ex: Hotel boutique em Roma (3 noites)" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Categoria</label>
+            <select id="inputExpCategory" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+              <option value="Hospedagem">🏨 Hospedagem</option>
+              <option value="Passagens">✈️ Voos & Trens</option>
+              <option value="Gastronomia">🍝 Comida & Vinho</option>
+              <option value="Passeios">🎟️ Ingressos & Tours</option>
+              <option value="Outros">🛍️ Outros / Compras</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Valor em Euros (€)</label>
+            <input type="number" step="any" id="inputExpAmount" placeholder="Ex: 350" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Quem Pagou / Paga</label>
+            <input type="text" id="inputExpPayer" placeholder="Ex: Dividido (50/50)" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Status</label>
+            <select id="inputExpStatus" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+              <option value="Pendente">⏳ A Pagar</option>
+              <option value="Pago">✅ Já Pago</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-6">
+        <button onclick="closeModal('modalExpense')" class="text-xs font-medium text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl transition">Cancelar</button>
+        <button onclick="saveExpenseItem()" class="text-xs font-semibold bg-terracotta-600 hover:bg-terracotta-700 text-white px-5 py-2 rounded-xl transition">Adicionar Despesa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Adicionar Restaurante -->
+  <div id="modalRestaurant" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200">
+      <h3 class="text-xl font-serif font-bold text-espresso mb-1">Adicionar Restaurante ou Bar</h3>
+      <p class="text-xs text-stone-500 mb-4">Guarde aquele lugar charmoso que viram no Instagram ou indicação de amigos.</p>
+      
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Nome do Restaurante / Gelateria</label>
+          <input type="text" id="inputRestName" placeholder="Ex: Trattoria Da Enzo al 29" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Cidade</label>
+            <input type="text" id="inputRestCity" placeholder="Ex: Roma (Trastevere)" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Tipo</label>
+            <select id="inputRestType" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+              <option value="Trattoria Romântica">🍝 Trattoria Romântica</option>
+              <option value="Gelateria Artesanal">🍨 Gelateria Artesanal</option>
+              <option value="Wine Bar & Aperitivo">🍷 Wine Bar & Aperitivo</option>
+              <option value="Pizzaria Tradicional">🍕 Pizzaria Tradicional</option>
+              <option value="Café Histórico">☕ Café Histórico</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Prato ou Bebida Imperdível</label>
+          <input type="text" id="inputRestSpecialty" placeholder="Ex: Cacio e Pepe cremoso e Tiramisù da casa" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Link ou Endereço (Opcional)</label>
+          <input type="text" id="inputRestLink" placeholder="Ex: Link do Google Maps ou @instagram" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-6">
+        <button onclick="closeModal('modalRestaurant')" class="text-xs font-medium text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl transition">Cancelar</button>
+        <button onclick="saveRestaurantItem()" class="text-xs font-semibold bg-terracotta-600 hover:bg-terracotta-700 text-white px-5 py-2 rounded-xl transition">Salvar Restaurante</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Adicionar Item Checklist de Malas -->
+  <div id="modalChecklist" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200">
+      <h3 class="text-xl font-serif font-bold text-espresso mb-1">Novo Item para a Mala / Bagagem</h3>
+      <p class="text-xs text-stone-500 mb-4">Adicione o que não pode faltar na viagem.</p>
+      
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Item</label>
+          <input type="text" id="inputChecklistName" placeholder="Ex: Adaptador de tomada padrão Itália" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Categoria</label>
+          <select id="inputChecklistCategory" class="w-full text-sm border border-stone-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+            <option value="documentos">📄 Documentos & Reservas</option>
+            <option value="mala_dele">👔 Mala Dele</option>
+            <option value="mala_dela">👗 Mala Dela</option>
+            <option value="farmacia_tech">💊 Farmácia & Eletrônicos</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-6">
+        <button onclick="closeModal('modalChecklist')" class="text-xs font-medium text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl transition">Cancelar</button>
+        <button onclick="saveChecklistItem()" class="text-xs font-semibold bg-terracotta-600 hover:bg-terracotta-700 text-white px-5 py-2 rounded-xl transition">Adicionar Item</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIO ELEMENT: MUSICA ITALIANA (LOOPING) -->
+  <audio id="italianAudio" src="musica-italiana.mp3" loop preload="auto"></audio>
+  <!-- AUDIO ELEMENT: SOM DE CONCLUSAO DE TAREFA ("AH É!?") -->
+  <audio id="taskCompletedAudio" src="conclusao-tarefa.mp3" preload="auto"></audio>
+
+  <!-- FLOATING ITALIAN MUSIC PLAYER -->
+  <div id="floatingMusicPlayer" class="fixed bottom-5 right-5 z-40 bg-espresso/95 backdrop-blur-md text-white border border-terracotta-500/40 rounded-2xl shadow-2xl p-3.5 flex flex-col gap-2 no-print max-w-sm transition-all duration-300 hover:border-terracotta-400">
+    <div class="flex items-center gap-3">
+      <!-- Equalizer Visualizer Button -->
+      <button onclick="toggleMusicPlay()" class="w-10 h-10 rounded-xl bg-terracotta-600/30 border border-terracotta-500/40 flex items-center justify-center shrink-0 overflow-hidden cursor-pointer hover:bg-terracotta-600/50 transition group" title="Tocar / Pausar Música">
+        <div id="musicEqualizer" class="flex items-end gap-0.5 h-4">
+          <div class="w-1 bg-terracotta-400 rounded-full h-1 eq-bar-1"></div>
+          <div class="w-1 bg-amber-300 rounded-full h-1 eq-bar-2"></div>
+          <div class="w-1 bg-emerald-400 rounded-full h-1 eq-bar-3"></div>
+          <div class="w-1 bg-rose-400 rounded-full h-1 eq-bar-4"></div>
+        </div>
+      </button>
+
+      <!-- Track Info -->
+      <div class="flex-1 min-w-[130px] overflow-hidden">
+        <div class="flex items-center gap-1.5 text-[10px] text-amber-300 uppercase tracking-wider font-semibold">
+          <span>🇮🇹 Trilha Sonora</span>
+          <span class="text-white/30">•</span>
+          <span class="inline-flex items-center gap-1 bg-terracotta-500/30 text-terracotta-200 px-1.5 py-0.5 rounded text-[9px] font-mono">🔁 Looping</span>
+        </div>
+        <div id="currentTrackTitle" class="text-xs font-serif font-bold text-white truncate">
+          Música Italiana do Casal
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center gap-1.5">
+        <button onclick="toggleMusicPlay()" id="floatPlayBtn" class="p-2.5 bg-terracotta-600 hover:bg-terracotta-500 text-white rounded-xl shadow transition cursor-pointer flex items-center justify-center" title="Tocar / Pausar">
+          <i data-lucide="play" id="floatPlayIcon" class="w-4 h-4 fill-current"></i>
+        </button>
+        <button onclick="openMusicLounge()" class="p-2 text-stone-300 hover:text-white transition rounded-xl hover:bg-white/10 cursor-pointer" title="Ajustar Volume e Opções">
+          <i data-lucide="sliders" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mini Progress Bar / Scrubber -->
+    <div class="flex items-center gap-2 text-[10px] text-stone-300 font-mono px-0.5 pt-0.5 border-t border-white/10">
+      <span id="audioCurrentTime">0:00</span>
+      <div class="flex-1 bg-white/15 h-1.5 rounded-full overflow-hidden cursor-pointer hover:h-2 transition-all" onclick="seekAudio(event)" title="Clique para avançar/voltar">
+        <div id="audioProgressBar" class="bg-gradient-to-r from-amber-400 to-terracotta-500 h-full w-0 transition-all duration-75"></div>
+      </div>
+      <span id="audioTotalDuration">0:14</span>
+    </div>
+  </div>
+
+  <!-- MODAL: LOUNGE MUSICAL ITALIANO & SPOTIFY -->
+  <div id="modalMusicLounge" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-stone-200 my-8 space-y-4">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-3 border-b border-stone-100 pb-3">
+        <div>
+          <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-terracotta-700 uppercase tracking-widest mb-1">
+            <span>🇮🇹 Colonna Sonora Romantica</span>
+          </div>
+          <h3 class="text-2xl font-serif font-bold text-espresso">Música da Viagem & Lounge 🍷🎶</h3>
+          <p class="text-xs text-stone-500 mt-0.5">Sua trilha sonora italiana tocando em looping contínuo com controle total de pausa e volume.</p>
+        </div>
+        <button onclick="closeModal('modalMusicLounge')" class="p-1.5 text-stone-400 hover:text-stone-700 rounded-lg hover:bg-stone-100 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Music Source Switcher Tabs -->
+      <div class="flex gap-2 p-1 bg-stone-100 rounded-xl text-xs font-semibold">
+        <button onclick="switchMusicLoungeTab('native')" id="musicTabBtn-native" class="flex-1 py-2 px-3 rounded-lg bg-white text-espresso shadow-sm transition flex items-center justify-center gap-1.5">
+          <i data-lucide="disc-3" class="w-3.5 h-3.5 text-terracotta-600"></i> Sua Música em Looping
+        </button>
+        <button onclick="switchMusicLoungeTab('spotify')" id="musicTabBtn-spotify" class="flex-1 py-2 px-3 rounded-lg text-stone-600 hover:text-espresso transition flex items-center justify-center gap-1.5">
+          <i data-lucide="music" class="w-3.5 h-3.5 text-emerald-600"></i> Spotify Oficial
+        </button>
+        <button onclick="switchMusicLoungeTab('apps')" id="musicTabBtn-apps" class="flex-1 py-2 px-3 rounded-lg text-stone-600 hover:text-espresso transition flex items-center justify-center gap-1.5">
+          <i data-lucide="external-link" class="w-3.5 h-3.5 text-blue-600"></i> No Celular
+        </button>
+      </div>
+
+      <!-- TAB 1: NATIVE LOOPING AUDIO -->
+      <div id="musicLoungeContent-native" class="space-y-4">
+        <div class="bg-gradient-to-r from-terracotta-50 to-amber-50 border border-terracotta-200/80 p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl bg-terracotta-500 text-white flex items-center justify-center text-2xl shadow-sm">
+              🇮🇹
+            </div>
+            <div>
+              <span class="font-bold text-espresso text-sm block">Música Italiana do Casal</span>
+              <span class="text-xs text-stone-600 flex items-center gap-1.5 mt-0.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Configurada em looping contínuo • Pause quando quiser
+              </span>
+            </div>
+          </div>
+          <button onclick="toggleMusicPlay()" id="modalTogglePlayBtn" class="bg-terracotta-600 hover:bg-terracotta-700 text-white font-medium text-xs px-4 py-2.5 rounded-xl transition flex items-center justify-center gap-2 shrink-0 shadow cursor-pointer">
+            <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+            <span id="modalTogglePlayText">Tocar Agora</span>
+          </button>
+        </div>
+
+        <!-- Volume Controller -->
+        <div class="bg-stone-50 p-4 rounded-2xl border border-stone-200/80 flex items-center gap-3 text-xs">
+          <i data-lucide="volume-2" class="w-4 h-4 text-stone-500"></i>
+          <span class="text-stone-700 font-semibold">Volume da Música:</span>
+          <input type="range" id="musicVolumeSlider" min="0" max="1" step="0.05" value="0.7" oninput="setMusicVolume(this.value)" class="flex-1 accent-terracotta-600 cursor-pointer">
+          <span id="musicVolumeDisplay" class="font-mono text-stone-600 font-bold text-xs w-9 text-right">70%</span>
+        </div>
+
+        <!-- Info Card -->
+        <div class="bg-stone-50/70 border border-stone-200/70 rounded-2xl p-3.5 text-xs text-stone-500 space-y-1">
+          <p class="font-semibold text-stone-700">💡 Como funciona o looping:</p>
+          <p>A música toca sem parar em segundo plano enquanto vocês exploram o roteiro, custos e checklist. Para silenciar ou pausar, basta clicar no botão de pausa no canto inferior direito ou no topo da página a qualquer instante.</p>
+        </div>
+      </div>
+
+      <!-- TAB 2: SPOTIFY EMBEDDED PLAYER -->
+      <div id="musicLoungeContent-spotify" class="hidden space-y-3">
+        <p class="text-xs text-stone-500">Ouça grandes vozes clássicas da Itália: Andrea Bocelli, Dean Martin (<em>That's Amore</em>), Mina e clássicos românticos:</p>
+        <div class="rounded-2xl overflow-hidden border border-stone-200 shadow-inner bg-black">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX8y7Kw9fG6Sg?utm_source=generator&theme=0" width="100%" height="320" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+
+      <!-- TAB 3: EXTERNAL MUSIC APPS LINKS -->
+      <div id="musicLoungeContent-apps" class="hidden space-y-3">
+        <p class="text-xs text-stone-500">Abra a trilha sonora diretamente nos aplicativos de música do casal:</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+          <a href="https://open.spotify.com/search/italian%20dinner%20acoustic" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-2xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100/80 transition flex items-center gap-3 group">
+            <span class="text-2xl">🟢</span>
+            <div>
+              <div class="font-bold text-emerald-950 text-xs group-hover:underline">Spotify</div>
+              <div class="text-[10px] text-emerald-700">Italian Romance</div>
+            </div>
+          </a>
+
+          <a href="https://music.apple.com/search?term=italian%20romance" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-2xl border border-rose-200 bg-rose-50 hover:bg-rose-100/80 transition flex items-center gap-3 group">
+            <span class="text-2xl">🍎</span>
+            <div>
+              <div class="font-bold text-rose-950 text-xs group-hover:underline">Apple Music</div>
+              <div class="text-[10px] text-rose-700">Canzoni d'Amore</div>
+            </div>
+          </a>
+
+          <a href="https://music.youtube.com/search?q=italian+acoustic+romance" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-2xl border border-red-200 bg-red-50 hover:bg-red-100/80 transition flex items-center gap-3 group">
+            <span class="text-2xl">🔴</span>
+            <div>
+              <div class="font-bold text-red-950 text-xs group-hover:underline">YouTube Music</div>
+              <div class="text-[10px] text-red-700">Serenata Italiana</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-2 border-t border-stone-100 flex justify-between items-center text-xs text-stone-400">
+        <span>"Chi canta, prega due volte."</span>
+        <button onclick="closeModal('modalMusicLounge')" class="bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium px-4 py-2 rounded-xl transition">
+          Fechar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-stone-200 mt-12 py-8 text-center text-xs text-stone-400 no-print">
+    <div class="max-w-6xl mx-auto px-4 space-y-2">
+      <p class="font-serif italic text-stone-600 text-sm">"L'amore trova la via." (O amor encontra o caminho)</p>
+      <p>Planejado com paixão para a viagem dos sonhos à Itália 🇮🇹 • Dados salvos no navegador</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // Storage Key
+    const STORAGE_KEY = 'ITALIA_TRIP_PLANNER_DATA_V2';
+
+    // State
+    let tripData = {
+      couple: {
+        names: "Nós Dois",
+        destination: "Roma, Florença, Toscana, Veneza & Além"
+      },
+      dates: {
+        startDate: "",
+        endDate: ""
+      },
+      budget: {
+        limit: 4000,
+        euroRate: 6.00,
+        expenses: []
+      },
+      supremeChecklist: [],
+      historyLog: [],
+      days: [],
+      restaurants: [],
+      checklist: {
+        documentos: [],
+        mala_dele: [],
+        mala_dela: [],
+        farmacia_tech: []
+      }
+    };
+
+    // Filter states
+    let currentSupremePhaseFilter = 'all';
+    let currentSupremeAssigneeFilter = 'all';
+    let currentExpenseFilter = 'all';
+
+    // Initialize App
+    function initApp() {
+      loadFromStorage();
+      upgradeDataIfNeeded();
+      renderAll();
+      startCountdown();
+      lucide.createIcons();
+    }
+
+    function upgradeDataIfNeeded() {
+      if (!tripData.supremeChecklist || tripData.supremeChecklist.length === 0) {
+        tripData.supremeChecklist = getDefaultSupremeChecklist();
+      }
+      if (!tripData.historyLog || tripData.historyLog.length === 0) {
+        tripData.historyLog = [
+          {
+            id: 'init-1',
+            date: new Date().toISOString().split('T')[0],
+            title: "Il Grande Inizio: O Sonho Começou! 🇮🇹",
+            text: "Demos a largada no planejamento oficial da nossa viagem inesquecível pela Itália. Que venham os dias mais lindos das nossas vidas!",
+            author: "Casal",
+            type: "milestone"
+          }
+        ];
+      }
+      if (tripData.days.length === 0) {
+        loadDefaultItinerary(false);
+      }
+      if (tripData.restaurants.length === 0) {
+        loadDefaultFoodWishlist(false);
+      }
+      if (!tripData.checklist.documentos || tripData.checklist.documentos.length === 0) {
+        loadDefaultChecklist(false);
+      }
+      saveToStorage();
+    }
+
+    // Storage Management
+    function loadFromStorage() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          tripData = JSON.parse(saved);
+        } catch (e) {
+          console.error("Erro ao carregar dados salvos:", e);
+        }
+      }
+    }
+
+    function saveToStorage() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tripData));
+    }
+
+    // Export & Import
+    function exportData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tripData, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `viagem-italia-suprema-${tripData.couple.names.replace(/\s+/g, '-').toLowerCase()}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function importData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          tripData = imported;
+          upgradeDataIfNeeded();
+          saveToStorage();
+          renderAll();
+          alert("Dados da viagem importados com sucesso! ✨");
+        } catch (err) {
+          alert("Arquivo JSON inválido.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Tab Navigation
+    function switchTab(tabId) {
+      const tabs = ['checklist-supremo', 'historico', 'itinerario', 'orcamento', 'gastronomia', 'malas', 'dicas'];
+      tabs.forEach(t => {
+        const content = document.getElementById(`tabContent-${t}`);
+        const btn = document.getElementById(`tabBtn-${t}`);
+        if (!content || !btn) return;
+        if (t === tabId) {
+          content.classList.remove('hidden');
+          btn.className = "nav-tab active-tab px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 whitespace-nowrap bg-terracotta-600 text-white shadow-sm";
+        } else {
+          content.classList.add('hidden');
+          btn.className = "nav-tab px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 whitespace-nowrap text-stone-600 hover:bg-stone-200/60 hover:text-stone-900";
+        }
+      });
+      lucide.createIcons();
+    }
+
+    // Render Master
+    function renderAll() {
+      // Couple info
+      document.getElementById('displayCoupleNames').innerText = tripData.couple.names || "Nós Dois";
+      document.getElementById('displayDestination').innerText = tripData.couple.destination || "Itália Romântica";
+      
+      // Dates
+      if (tripData.dates.startDate) {
+        const start = new Date(tripData.dates.startDate + 'T00:00:00');
+        const formatted = start.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+        document.getElementById('displayTripDatesRange').innerText = `Embarque: ${formatted}`;
+      } else {
+        document.getElementById('displayTripDatesRange').innerText = "Embarque: A definir juntos";
+      }
+
+      // Render Modules
+      renderSupremeChecklist();
+      renderHistory();
+      renderDays();
+      renderBudget();
+      renderRestaurants();
+      renderChecklist();
+      updateKPIs();
+      lucide.createIcons();
+    }
+
+    // Modal Helpers
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+      lucide.createIcons();
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    // Couple Edit
+    function editCoupleNames() {
+      document.getElementById('inputCoupleNames').value = tripData.couple.names;
+      document.getElementById('inputDestination').value = tripData.couple.destination;
+      openModal('modalCouple');
+    }
+    function saveCoupleNames() {
+      const names = document.getElementById('inputCoupleNames').value.trim();
+      const dest = document.getElementById('inputDestination').value.trim();
+      if (names) tripData.couple.names = names;
+      if (dest) tripData.couple.destination = dest;
+      saveToStorage();
+      closeModal('modalCouple');
+      renderAll();
+    }
+
+    // Dates Edit
+    function editTripDate() {
+      document.getElementById('inputTripStartDate').value = tripData.dates.startDate;
+      document.getElementById('inputTripEndDate').value = tripData.dates.endDate;
+      openModal('modalDate');
+    }
+    function saveTripDates() {
+      tripData.dates.startDate = document.getElementById('inputTripStartDate').value;
+      tripData.dates.endDate = document.getElementById('inputTripEndDate').value;
+      saveToStorage();
+      closeModal('modalDate');
+      renderAll();
+      if (window.confetti && tripData.dates.startDate) {
+        confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
+      }
+    }
+
+    // Countdown Timer
+    let countdownInterval = null;
+    function startCountdown() {
+      if (countdownInterval) clearInterval(countdownInterval);
+      
+      function update() {
+        if (!tripData.dates.startDate) {
+          document.getElementById('countDays').innerText = "00";
+          document.getElementById('countHours').innerText = "00";
+          document.getElementById('countMinutes').innerText = "00";
+          document.getElementById('countSeconds').innerText = "00";
+          return;
+        }
+
+        const target = new Date(tripData.dates.startDate + 'T00:00:00').getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
+
+        if (diff <= 0) {
+          document.getElementById('countDays').innerText = "00";
+          document.getElementById('countHours').innerText = "00";
+          document.getElementById('countMinutes').innerText = "00";
+          document.getElementById('countSeconds').innerText = "00";
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('countDays').innerText = String(days).padStart(2, '0');
+        document.getElementById('countHours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('countMinutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('countSeconds').innerText = String(seconds).padStart(2, '0');
+      }
+
+      update();
+      countdownInterval = setInterval(update, 1000);
+    }
+
+    // ==============================================
+    // CHECKLIST SUPREMO POR FASES LOGIC
+    // ==============================================
+    function renderSupremeChecklist() {
+      const container = document.getElementById('supremePhasesContainer');
+      container.innerHTML = '';
+
+      let grandTotal = 0;
+      let grandDone = 0;
+
+      tripData.supremeChecklist.forEach((phase, phaseIndex) => {
+        const phaseNum = phaseIndex + 1;
+        const isPhaseVisible = (currentSupremePhaseFilter === 'all' || currentSupremePhaseFilter === phaseNum);
+
+        // Calculate phase progress
+        const phaseTotal = phase.items.length;
+        const phaseDone = phase.items.filter(i => i.done).length;
+        grandTotal += phaseTotal;
+        grandDone += phaseDone;
+        const phasePct = phaseTotal === 0 ? 0 : Math.round((phaseDone / phaseTotal) * 100);
+
+        if (!isPhaseVisible) return;
+
+        // Filter items by assignee if needed
+        const visibleItems = phase.items.map((item, originalIndex) => ({ item, originalIndex })).filter(wrapper => {
+          if (currentSupremeAssigneeFilter === 'all') return true;
+          return wrapper.item.assigned === currentSupremeAssigneeFilter;
+        });
+
+        const phaseCard = document.createElement('div');
+        phaseCard.className = "bg-white rounded-3xl border border-stone-200/90 shadow-sm overflow-hidden transition hover:shadow-md";
+
+        let phaseItemsHtml = '';
+        if (visibleItems.length === 0) {
+          phaseItemsHtml = `<div class="p-6 text-center text-xs text-stone-400 italic">Nenhum passo para o filtro selecionado nesta fase.</div>`;
+        } else {
+          visibleItems.forEach(({ item, originalIndex }) => {
+            const isDone = item.done;
+            let priorityBadge = "";
+            if (item.priority) {
+              priorityBadge = `<span class="text-[10px] px-2 py-0.5 rounded-md font-semibold bg-stone-100 text-stone-600 border border-stone-200">${escapeHtml(item.priority)}</span>`;
+            }
+
+            let assigneeBadge = `<span class="text-[10px] px-2 py-0.5 rounded-md font-semibold bg-rose-50 text-rose-700 border border-rose-100">💑 Os Dois</span>`;
+            if (item.assigned === "Ele") assigneeBadge = `<span class="text-[10px] px-2 py-0.5 rounded-md font-semibold bg-blue-50 text-blue-700 border border-blue-100">👔 Ele</span>`;
+            if (item.assigned === "Ela") assigneeBadge = `<span class="text-[10px] px-2 py-0.5 rounded-md font-semibold bg-purple-50 text-purple-700 border border-purple-100">👗 Ela</span>`;
+
+            phaseItemsHtml += `
+              <div class="p-4 border-b border-stone-100 last:border-0 hover:bg-stone-50/70 transition flex items-start justify-between gap-3 ${isDone ? 'bg-emerald-50/20' : ''}">
+                <div class="flex items-start gap-3.5 flex-1">
+                  <input type="checkbox" onchange="toggleSupremeItem(${phaseIndex}, ${originalIndex})" ${isDone ? 'checked' : ''} class="mt-1 w-5 h-5 text-terracotta-600 rounded-md focus:ring-0 cursor-pointer accent-terracotta-600">
+                  <div class="space-y-1 flex-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                      <span class="text-sm font-semibold ${isDone ? 'line-through text-stone-400' : 'text-stone-900'}">${escapeHtml(item.title)}</span>
+                      ${priorityBadge}
+                      ${assigneeBadge}
+                      ${isDone && item.completedAt ? `<span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-medium">✓ Concluído em ${escapeHtml(item.completedAt)}</span>` : ''}
+                    </div>
+                    <p class="text-xs ${isDone ? 'text-stone-400' : 'text-stone-600'} leading-relaxed">${escapeHtml(item.desc || '')}</p>
+                    ${item.notes ? `
+                      <div class="mt-1.5 p-2 bg-amber-50/70 border border-amber-200/60 rounded-xl text-xs text-amber-900 flex items-center gap-1.5">
+                        <i data-lucide="pin" class="w-3.5 h-3.5 text-amber-600"></i>
+                        <span>${escapeHtml(item.notes)}</span>
+                      </div>
+                    ` : ''}
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-1 no-print">
+                  <button onclick="promptEditSupremeNote(${phaseIndex}, ${originalIndex})" title="Adicionar anotação/link" class="p-1.5 text-stone-400 hover:text-stone-700 hover:bg-stone-100 rounded-lg transition">
+                    <i data-lucide="edit-3" class="w-4 h-4"></i>
+                  </button>
+                  <button onclick="deleteSupremeItem(${phaseIndex}, ${originalIndex})" title="Excluir passo" class="p-1.5 text-stone-300 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+            `;
+          });
+        }
+
+        phaseCard.innerHTML = `
+          <!-- Phase Header -->
+          <div class="bg-gradient-to-r from-stone-50 via-white to-stone-50 p-5 border-b border-stone-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3.5">
+              <span class="w-10 h-10 rounded-2xl bg-terracotta-500/10 text-terracotta-700 border border-terracotta-200 flex items-center justify-center font-bold text-sm font-serif">
+                0${phaseNum}
+              </span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-serif font-bold text-lg md:text-xl text-espresso">${escapeHtml(phase.phaseName)}</h3>
+                  <span class="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                    ${escapeHtml(phase.badge || 'Traguardo')}
+                  </span>
+                </div>
+                <p class="text-xs text-stone-500 mt-0.5">${escapeHtml(phase.phaseDesc)}</p>
+              </div>
+            </div>
+
+            <!-- Phase Progress Pill -->
+            <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2">
+              <span class="text-xs font-bold ${phasePct === 100 ? 'text-emerald-700' : 'text-stone-700'}">
+                ${phaseDone}/${phaseTotal} concluídos (${phasePct}%)
+              </span>
+              <div class="w-28 bg-stone-200 h-2 rounded-full overflow-hidden">
+                <div class="h-2 rounded-full transition-all duration-300 ${phasePct === 100 ? 'bg-emerald-500' : 'bg-terracotta-500'}" style="width: ${phasePct}%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Items List -->
+          <div class="divide-y divide-stone-100">
+            ${phaseItemsHtml}
+          </div>
+        `;
+        container.appendChild(phaseCard);
+      });
+
+      // Update Grand Progress Header Bar
+      const grandPct = grandTotal === 0 ? 0 : Math.round((grandDone / grandTotal) * 100);
+      document.getElementById('displayGrandProgressText').innerText = `${grandDone} de ${grandTotal} passos (${grandPct}%)`;
+      document.getElementById('grandProgressBar').style.width = `${grandPct}%`;
+      document.getElementById('kpiCompletedSteps').innerText = `${grandDone} Passos`;
+    }
+
+    function playTaskCompleteSound() {
+      try {
+        const sound = document.getElementById('taskCompletedAudio') || new Audio('conclusao-tarefa.mp3');
+        sound.currentTime = 0;
+        sound.volume = 1.0;
+        const playPromise = sound.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(e => console.log("Task audio playback prevented:", e));
+        }
+      } catch (err) {
+        console.error("Audio trigger error:", err);
+      }
+    }
+
+    function toggleSupremeItem(phaseIndex, itemIndex) {
+      const item = tripData.supremeChecklist[phaseIndex].items[itemIndex];
+      item.done = !item.done;
+
+      if (item.done) {
+        playTaskCompleteSound();
+        const today = new Date();
+        const dateStr = today.toLocaleDateString('pt-BR');
+        item.completedAt = dateStr;
+
+        // Automatically log to History
+        tripData.historyLog.unshift({
+          id: 'hist-' + Date.now(),
+          date: today.toISOString().split('T')[0],
+          title: `Passo Concluído: ${item.title}`,
+          text: `Finalizamos com sucesso este marco da ${tripData.supremeChecklist[phaseIndex].phaseName} (${item.assigned})! ✨`,
+          author: item.assigned || "Casal",
+          type: "milestone"
+        });
+
+        if (window.confetti) {
+          confetti({ particleCount: 50, spread: 65, origin: { y: 0.7 } });
+        }
+      } else {
+        item.completedAt = null;
+      }
+
+      saveToStorage();
+      renderAll();
+    }
+
+    function promptEditSupremeNote(phaseIndex, itemIndex) {
+      const item = tripData.supremeChecklist[phaseIndex].items[itemIndex];
+      const note = prompt("Anotação, link de reserva ou lembrete para este passo:", item.notes || "");
+      if (note !== null) {
+        item.notes = note.trim();
+        saveToStorage();
+        renderAll();
+      }
+    }
+
+    function deleteSupremeItem(phaseIndex, itemIndex) {
+      if (confirm("Deseja realmente remover este passo do checklist?")) {
+        tripData.supremeChecklist[phaseIndex].items.splice(itemIndex, 1);
+        saveToStorage();
+        renderAll();
+      }
+    }
+
+    function openAddSupremeItemModal() {
+      document.getElementById('inputSupTitle').value = "";
+      document.getElementById('inputSupDesc').value = "";
+      openModal('modalSupremeItem');
+    }
+
+    function saveSupremeItem() {
+      const phaseIdx = parseInt(document.getElementById('inputSupPhase').value);
+      const title = document.getElementById('inputSupTitle').value.trim();
+      const desc = document.getElementById('inputSupDesc').value.trim();
+      const assigned = document.getElementById('inputSupAssigned').value;
+      const priority = document.getElementById('inputSupPriority').value;
+
+      if (!title) {
+        alert("Preencha o título do passo.");
+        return;
+      }
+
+      if (!tripData.supremeChecklist[phaseIdx]) return;
+
+      tripData.supremeChecklist[phaseIdx].items.push({
+        id: 'sup-' + Date.now(),
+        title,
+        desc,
+        assigned,
+        priority,
+        done: false,
+        completedAt: null,
+        notes: ""
+      });
+
+      saveToStorage();
+      closeModal('modalSupremeItem');
+      renderAll();
+    }
+
+    function filterSupremePhase(phaseNum) {
+      currentSupremePhaseFilter = phaseNum;
+      const btns = document.querySelectorAll('.phase-filter-btn');
+      btns.forEach(b => {
+        b.className = "phase-filter-btn bg-white text-stone-600 hover:bg-stone-200 px-3 py-1.5 rounded-lg whitespace-nowrap border border-stone-200";
+      });
+      event.target.className = "phase-filter-btn active bg-stone-800 text-white font-semibold px-3 py-1.5 rounded-lg whitespace-nowrap";
+      renderSupremeChecklist();
+      lucide.createIcons();
+    }
+
+    function filterSupremeAssignee(val) {
+      currentSupremeAssigneeFilter = val;
+      renderSupremeChecklist();
+      lucide.createIcons();
+    }
+
+    function resetDefaultSupremeChecklist() {
+      if (confirm("Deseja restaurar as 6 fases completas do Checklist Supremo para o modelo original?")) {
+        tripData.supremeChecklist = getDefaultSupremeChecklist();
+        saveToStorage();
+        renderAll();
+        if (window.confetti) confetti({ particleCount: 50, spread: 60 });
+      }
+    }
+
+    // Default Supreme Checklist Seed
+    function getDefaultSupremeChecklist() {
+      return [
+        {
+          phaseId: 1,
+          phaseName: "Fase 1: Il Sogno (12 a 6 meses antes)",
+          phaseDesc: "Definição do estilo da viagem, passaportes e época do ano",
+          badge: "Sognatori 💭",
+          items: [
+            { id: "s1", title: "Conferir validade dos passaportes", desc: "Devem ter no mínimo 6 meses de validade além da data prevista de retorno ao Brasil.", assigned: "Os Dois", priority: "🔥 Crítico", done: false, completedAt: null, notes: "" },
+            { id: "s2", title: "Escolher a melhor época do ano", desc: "Maio a Junho (Primavera florida) ou Setembro a Outubro (Vindima do vinho) têm clima ameno e menos lotação.", assigned: "Os Dois", priority: "⭐ Importante", done: false, completedAt: null, notes: "" },
+            { id: "s3", title: "Definir meta de orçamento total (€ / R$)", desc: "Estipular teto de gastos no Painel de Orçamento para voos, hospedagem e jantares românticos.", assigned: "Os Dois", priority: "⭐ Importante", done: false, completedAt: null, notes: "" },
+            { id: "s4", title: "Mapear as cidades essenciais dos dois", desc: "Roma, Florença, colinas da Toscana, Veneza, Costa Amalfitana ou Milão & Lagos.", assigned: "Os Dois", priority: "💡 Experiência", done: false, completedAt: null, notes: "" }
+          ]
+        },
+        {
+          phaseId: 2,
+          phaseName: "Fase 2: I Grandi Passi (6 a 4 meses antes)",
+          phaseDesc: "Garantir voos, hospedagens românticas centrais e transporte",
+          badge: "Esploratori 🗺️",
+          items: [
+            { id: "s5", title: "Comprar passagens aéreas (Ida & Volta)", desc: "Dica de ouro: Chegar por Roma (FCO) e voltar por Veneza (VCE) ou Milão para não ter que retroceder pelo país.", assigned: "Os Dois", priority: "🔥 Crítico", done: false, completedAt: null, notes: "" },
+            { id: "s6", title: "Reservar hotéis ou Airbnbs charmosos e bem localizados", desc: "Priorizar localização central para poder fazer tudo a pé e voltar ao hotel para descansar à tarde.", assigned: "Os Dois", priority: "🔥 Crítico", done: false, completedAt: null, notes: "" },
+            { id: "s7", title: "Comprar passagens de trem de alta velocidade", desc: "Trens Frecciarossa ou Italo (Roma -> Florença -> Veneza). Comprados com antecedência custam até 60% menos!", assigned: "Ele", priority: "⭐ Importante", done: false, completedAt: null, notes: "" },
+            { id: "s8", title: "Emitir PID (Permissão Internacional para Dirigir)", desc: "Obrigatória caso aluguem carro para circular pelas estradinhas secundárias e vinícolas da Toscana.", assigned: "Ele", priority: "⭐ Importante", done: false, completedAt: null, notes: "" }
+          ]
+        },
+        {
+          phaseId: 3,
+          phaseName: "Fase 3: La Magia dei Dettagli (3 a 2 meses antes)",
+          phaseDesc: "Ingressos disputados, seguro obrigatório e câmbio",
+          badge: "Artisti 🎨",
+          items: [
+            { id: "s9", title: "Contratar Seguro Viagem Europa (Tratado de Schengen)", desc: "Exigência legal para entrada na Europa: cobertura mínima de € 30.000 para emergências médicas.", assigned: "Os Dois", priority: "🔥 Crítico", done: false, completedAt: null, notes: "" },
+            { id: "s10", title: "Garantir ingressos fura-fila do Coliseu e Fórum Romano", desc: "Ingressos oficiais abrem 30 dias antes e evaporam em minutos. Fiquem atentos às datas de abertura!", assigned: "Ela", priority: "🔥 Crítico", done: false, completedAt: null, notes: "" },
+            { id: "s11", title: "Comprar ingressos Museu do Vaticano & Capela Sistina", desc: "Comprar sempre no site oficial dos Museus Vaticanos para evitar filas que dão a volta no muro.", assigned: "Ele", priority: "🔥 Crítico", done: false, completedAt: null, notes: "" },
+            { id: "s12", title: "Reservar ingressos para a Galeria Uffizi e Galleria dell'Accademia (Florença)", desc: "Garante ver a estátua original de David e O Nascimento de Vênus sem horas de espera.", assigned: "Ela", priority: "⭐ Importante", done: false, completedAt: null, notes: "" },
+            { id: "s13", title: "Abrir conta e cartão multimoeda (Wise ou Nomad)", desc: "Comprar Euros aos poucos em dias de cotação favorável e evitar o IOF alto dos cartões tradicionais.", assigned: "Os Dois", priority: "⭐ Importante", done: false, completedAt: null, notes: "" }
+          ]
+        },
+        {
+          phaseId: 4,
+          phaseName: "Fase 4: Dolce Far Niente (1 mês a 2 semanas antes)",
+          phaseDesc: "Mesas românticas, conectividade e clima italiano",
+          badge: "Bongustai 🍷",
+          items: [
+            { id: "s14", title: "Reservar trattorias românticas disputadas", desc: "Locais como Trattoria Da Enzo (Roma) e restaurantes com vista para o Duomo em Florença.", assigned: "Os Dois", priority: "⭐ Importante", done: false, completedAt: null, notes: "" },
+            { id: "s15", title: "Comprar chip internacional ou eSIM digital (ex: Airalo)", desc: "Garante internet 5G no momento em que o avião pousar na Itália.", assigned: "Ele", priority: "⭐ Importante", done: false, completedAt: null, notes: "" },
+            { id: "s16", title: "Comprar sapatos super confortáveis e amaciá-los antes", desc: "Na Itália anda-se de 15.000 a 20.000 passos por dia em pedras antigas. Nada de sapatos novos que machuquem!", assigned: "Os Dois", priority: "🔥 Crítico", done: false, completedAt: null, notes: "" },
+            { id: "s17", title: "Separar looks elegantes e respeitosos para as igrejas", desc: "Ter opções com ombros e joelhos cobertos ou uma pashmina elegante sempre na bolsa dela.", assigned: "Ela", priority: "⭐ Importante", done: false, completedAt: null, notes: "" },
+            { id: "s18", title: "Criar a trilha sonora oficial do casal no Spotify", desc: "Músicas italianas clássicas e contemporâneas para ouvir no trem e no quarto de hotel.", assigned: "Ela", priority: "💡 Experiência", done: false, completedAt: null, notes: "" }
+          ]
+        },
+        {
+          phaseId: 5,
+          phaseName: "Fase 5: Il Grande Momento (Última semana & Véspera)",
+          phaseDesc: "Check-in online, malas prontas e últimos detalhes",
+          badge: "Pronti al Volo ✈️",
+          items: [
+            { id: "s19", title: "Fazer check-in online do voo e garantir assentos juntos", desc: "Garantir assentos lado a lado para curtir cada momento do voo juntos.", assigned: "Os Dois", priority: "🔥 Crítico", done: false, completedAt: null, notes: "" },
+            { id: "s20", title: "Imprimir cópias físicas e salvar em PDF no celular", desc: "Passaportes, apólice do seguro de viagem, comprovantes de hospedagens e ingressos.", assigned: "Ele", priority: "🔥 Crítico", done: false, completedAt: null, notes: "" },
+            { id: "s21", title: "Montar a farmacinha de viagem", desc: "Analgésicos, antialérgicos, remédios de uso pessoal e muitos curativos para pés (Compeed).", assigned: "Ela", priority: "⭐ Importante", done: false, completedAt: null, notes: "" },
+            { id: "s22", title: "Separar adaptadores de tomada tipo L e carregar o powerbank", desc: "Tomadas italianas têm 3 furinhos alinhados; carregar bateria portátil para não perder fotos.", assigned: "Ele", priority: "⭐ Importante", done: false, completedAt: null, notes: "" },
+            { id: "s23", title: "Avisar os bancos sobre o uso dos cartões no exterior", desc: "Evitar bloqueios preventivos de transações ao chegar na Itália.", assigned: "Os Dois", priority: "⭐ Importante", done: false, completedAt: null, notes: "" }
+          ]
+        },
+        {
+          phaseId: 6,
+          phaseName: "Fase 6: La Dolce Vita (Na Itália & Memórias)",
+          phaseDesc: "Registros e momentos inesquecíveis durante a realização do sonho",
+          badge: "Amore Eterno 🇮🇹❤️",
+          items: [
+            { id: "s24", title: "Jogar a moeda na Fontana di Trevi de costas juntos", desc: "A lenda diz que jogar a moeda com a mão direita sobre o ombro esquerdo garante retorno a Roma com o seu amor!", assigned: "Os Dois", priority: "💡 Experiência", done: false, completedAt: null, notes: "" },
+            { id: "s25", title: "Assistir ao pôr do sol na Piazzale Michelangelo com vinho Chianti", desc: "A vista mais romântica do mundo sobre o Rio Arno e o Duomo de Florença.", assigned: "Os Dois", priority: "💡 Experiência", done: false, completedAt: null, notes: "" },
+            { id: "s26", title: "Fazer o passeio de gôndola ao entardecer pelos canais de Veneza", desc: "Brindar a realização do sonho a dois navegando pelo labirinto veneziano.", assigned: "Os Dois", priority: "💡 Experiência", done: false, completedAt: null, notes: "" },
+            { id: "s27", title: "Tomar o melhor gelato de pistache artesanal da vida", desc: "Buscar gelaterias que exibem a cor bege/verde suave natural (pistache puro sem corantes).", assigned: "Os Dois", priority: "💡 Experiência", done: false, completedAt: null, notes: "" },
+            { id: "s28", title: "Escrever uma carta de amor italiana para abrir no último dia", desc: "Uma lembrança eterna do que essa viagem representou para a história de vocês.", assigned: "Os Dois", priority: "💡 Experiência", done: false, completedAt: null, notes: "" }
+          ]
+        }
+      ];
+    }
+
+    // ==============================================
+    // HISTÓRICO & LINHA DO TEMPO LOGIC
+    // ==============================================
+    function renderHistory() {
+      const container = document.getElementById('historyTimelineContainer');
+      container.innerHTML = '';
+
+      if (tripData.historyLog.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white p-6 rounded-2xl border border-dashed border-stone-300 text-center text-xs text-stone-500">
+            Nenhum marco registrado ainda. À medida que vocês completarem passos do Checklist Supremo ou adicionarem memórias aqui, a linha do tempo da viagem se formará!
+          </div>
+        `;
+        document.getElementById('kpiHistoryCount').innerText = "0 Marcos";
+        return;
+      }
+
+      document.getElementById('kpiHistoryCount').innerText = `${tripData.historyLog.length} Marcos`;
+
+      tripData.historyLog.forEach((item, index) => {
+        let dateFormatted = item.date;
+        try {
+          const parts = item.date.split('-');
+          if (parts.length === 3) {
+            const d = new Date(parts[0], parts[1] - 1, parts[2]);
+            dateFormatted = d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+          }
+        } catch(e) {}
+
+        let authorBadge = `<span class="text-[10px] px-2 py-0.5 rounded-full font-semibold bg-rose-50 text-rose-700 border border-rose-100">💑 Casal</span>`;
+        if (item.author === "Ele") authorBadge = `<span class="text-[10px] px-2 py-0.5 rounded-full font-semibold bg-blue-50 text-blue-700 border border-blue-100">👔 Ele</span>`;
+        if (item.author === "Ela") authorBadge = `<span class="text-[10px] px-2 py-0.5 rounded-full font-semibold bg-purple-50 text-purple-700 border border-purple-100">👗 Ela</span>`;
+
+        const entry = document.createElement('div');
+        entry.className = "relative group";
+        entry.innerHTML = `
+          <!-- Timeline Pin -->
+          <div class="absolute -left-[33px] md:-left-[41px] top-1.5 w-6 h-6 rounded-full bg-olive-500 text-white border-4 border-white shadow-sm flex items-center justify-center text-[10px]">
+            <i data-lucide="check" class="w-3 h-3"></i>
+          </div>
+
+          <!-- Entry Card -->
+          <div class="bg-white p-5 rounded-2xl border border-stone-200/90 shadow-sm hover:shadow-md transition space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold text-terracotta-700 tracking-wide">${escapeHtml(dateFormatted)}</span>
+                ${authorBadge}
+              </div>
+              <button onclick="deleteHistoryEntry(${index})" class="text-stone-300 hover:text-rose-500 transition p-1 no-print">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <h4 class="font-serif font-bold text-base md:text-lg text-espresso">${escapeHtml(item.title)}</h4>
+            <p class="text-xs md:text-sm text-stone-600 leading-relaxed">${escapeHtml(item.text)}</p>
+          </div>
+        `;
+        container.appendChild(entry);
+      });
+    }
+
+    function openAddHistoryModal() {
+      document.getElementById('inputHistDate').value = new Date().toISOString().split('T')[0];
+      document.getElementById('inputHistTitle').value = "";
+      document.getElementById('inputHistText').value = "";
+      openModal('modalHistory');
+    }
+
+    function saveHistoryEntry() {
+      const date = document.getElementById('inputHistDate').value;
+      const title = document.getElementById('inputHistTitle').value.trim();
+      const text = document.getElementById('inputHistText').value.trim();
+      const author = document.getElementById('inputHistAuthor').value;
+
+      if (!title || !text) {
+        alert("Preencha o título e o relato da memória.");
+        return;
+      }
+
+      tripData.historyLog.unshift({
+        id: 'hist-' + Date.now(),
+        date: date || new Date().toISOString().split('T')[0],
+        title,
+        text,
+        author,
+        type: "journal"
+      });
+
+      saveToStorage();
+      closeModal('modalHistory');
+      renderAll();
+      if (window.confetti) confetti({ particleCount: 30, spread: 50 });
+    }
+
+    function deleteHistoryEntry(index) {
+      if (confirm("Remover este marco do histórico?")) {
+        tripData.historyLog.splice(index, 1);
+        saveToStorage();
+        renderAll();
+      }
+    }
+
+    // ==============================================
+    // ROTEIRO (DAYS) LOGIC
+    // ==============================================
+    function renderDays() {
+      const container = document.getElementById('daysListContainer');
+      container.innerHTML = '';
+
+      if (tripData.days.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white p-8 rounded-2xl border border-dashed border-stone-300 text-center space-y-3">
+            <div class="w-12 h-12 rounded-full bg-terracotta-50 text-terracotta-500 mx-auto flex items-center justify-center">
+              <i data-lucide="calendar" class="w-6 h-6"></i>
+            </div>
+            <h4 class="font-serif font-bold text-lg text-espresso">Nenhum dia planejado ainda</h4>
+            <p class="text-xs text-stone-500 max-w-sm mx-auto">Comecem adicionando o primeiro dia ou usem a nossa sugestão de 7 dias clássica e romântica pela Itália!</p>
+            <button onclick="loadDefaultItinerary()" class="bg-terracotta-600 hover:bg-terracotta-700 text-white text-xs font-semibold px-4 py-2 rounded-xl transition">
+              Carregar Sugestão de Roteiro
+            </button>
+          </div>
+        `;
+        document.getElementById('kpiDaysCount').innerText = "0 Dias";
+        return;
+      }
+
+      document.getElementById('kpiDaysCount').innerText = `${tripData.days.length} ${tripData.days.length === 1 ? 'Dia' : 'Dias'}`;
+
+      tripData.days.forEach((day, index) => {
+        let badgeColor = "bg-stone-100 text-stone-700 border-stone-200";
+        if (day.status === "Confirmado") badgeColor = "bg-emerald-50 text-emerald-800 border-emerald-200";
+        if (day.status === "Imperdível") badgeColor = "bg-amber-50 text-amber-800 border-amber-200";
+
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-2xl border border-stone-200 shadow-sm p-5 hover:shadow-md transition space-y-3";
+        card.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-100 pb-3">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-xl bg-terracotta-500 text-white flex items-center justify-center font-bold text-sm shadow-sm">
+                ${index + 1}
+              </span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-serif font-bold text-lg text-espresso">${escapeHtml(day.dayNumber || `Dia ${index + 1}`)}: ${escapeHtml(day.headline || day.city)}</h3>
+                  <span class="text-[10px] font-semibold px-2.5 py-0.5 rounded-full border ${badgeColor}">
+                    ${escapeHtml(day.status || 'Planejando')}
+                  </span>
+                </div>
+                <div class="text-xs text-stone-500 flex items-center gap-2 mt-0.5">
+                  <span class="font-medium text-terracotta-700">📍 ${escapeHtml(day.city || 'Itália')}</span>
+                  ${day.date ? `<span>•</span> <span>${escapeHtml(day.date)}</span>` : ''}
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-1 self-end sm:self-center no-print">
+              <button onclick="editDayItem(${index})" class="p-1.5 text-stone-500 hover:text-stone-800 hover:bg-stone-100 rounded-lg transition" title="Editar Dia">
+                <i data-lucide="edit-2" class="w-4 h-4"></i>
+              </button>
+              <button onclick="deleteDayItem(${index})" class="p-1.5 text-rose-500 hover:text-rose-700 hover:bg-rose-50 rounded-lg transition" title="Remover Dia">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+            <div class="bg-amber-50/60 border border-amber-100 p-3 rounded-xl space-y-1">
+              <div class="font-bold text-amber-900 flex items-center gap-1.5">
+                <span>🌅 Manhã</span>
+              </div>
+              <p class="text-stone-600 leading-relaxed whitespace-pre-line">${escapeHtml(day.morning || 'Livre para acordar no próprio ritmo e tomar um cappuccino.')}</p>
+            </div>
+
+            <div class="bg-orange-50/60 border border-orange-100 p-3 rounded-xl space-y-1">
+              <div class="font-bold text-orange-900 flex items-center gap-1.5">
+                <span>☀️ Tarde</span>
+              </div>
+              <p class="text-stone-600 leading-relaxed whitespace-pre-line">${escapeHtml(day.afternoon || 'Passeio a pé pelas ruelas históricas e paradas para fotos.')}</p>
+            </div>
+
+            <div class="bg-indigo-50/60 border border-indigo-100 p-3 rounded-xl space-y-1">
+              <div class="font-bold text-indigo-900 flex items-center gap-1.5">
+                <span>🌙 Noite</span>
+              </div>
+              <p class="text-stone-600 leading-relaxed whitespace-pre-line">${escapeHtml(day.night || 'Jantar especial com massa fresca e vinho italiano.')}</p>
+            </div>
+          </div>
+
+          ${day.tip ? `
+            <div class="bg-stone-50 border border-stone-200/80 rounded-xl px-3.5 py-2 flex items-center gap-2 text-xs text-stone-600">
+              <span class="text-amber-500 font-bold">💡 Dica do Casal:</span>
+              <span>${escapeHtml(day.tip)}</span>
+            </div>
+          ` : ''}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openAddDayModal() {
+      document.getElementById('modalDayTitle').innerText = "Adicionar Dia de Viagem";
+      document.getElementById('inputDayId').value = "";
+      document.getElementById('inputDayNumber').value = `Dia ${tripData.days.length + 1}`;
+      document.getElementById('inputDayDate').value = "";
+      document.getElementById('inputDayCity').value = "";
+      document.getElementById('inputDayStatus').value = "Planejando";
+      document.getElementById('inputDayHeadline').value = "";
+      document.getElementById('inputDayMorning').value = "";
+      document.getElementById('inputDayAfternoon').value = "";
+      document.getElementById('inputDayNight').value = "";
+      document.getElementById('inputDayTip').value = "";
+      openModal('modalDay');
+    }
+
+    function editDayItem(index) {
+      const day = tripData.days[index];
+      document.getElementById('modalDayTitle').innerText = "Editar Dia de Viagem";
+      document.getElementById('inputDayId').value = index;
+      document.getElementById('inputDayNumber').value = day.dayNumber || `Dia ${index + 1}`;
+      document.getElementById('inputDayDate').value = day.date || "";
+      document.getElementById('inputDayCity').value = day.city || "";
+      document.getElementById('inputDayStatus').value = day.status || "Planejando";
+      document.getElementById('inputDayHeadline').value = day.headline || "";
+      document.getElementById('inputDayMorning').value = day.morning || "";
+      document.getElementById('inputDayAfternoon').value = day.afternoon || "";
+      document.getElementById('inputDayNight').value = day.night || "";
+      document.getElementById('inputDayTip').value = day.tip || "";
+      openModal('modalDay');
+    }
+
+    function saveDayItem() {
+      const id = document.getElementById('inputDayId').value;
+      const dayObj = {
+        dayNumber: document.getElementById('inputDayNumber').value.trim() || `Dia ${tripData.days.length + 1}`,
+        date: document.getElementById('inputDayDate').value.trim(),
+        city: document.getElementById('inputDayCity').value.trim() || "Itália",
+        status: document.getElementById('inputDayStatus').value,
+        headline: document.getElementById('inputDayHeadline').value.trim(),
+        morning: document.getElementById('inputDayMorning').value.trim(),
+        afternoon: document.getElementById('inputDayAfternoon').value.trim(),
+        night: document.getElementById('inputDayNight').value.trim(),
+        tip: document.getElementById('inputDayTip').value.trim()
+      };
+
+      if (id !== "") {
+        tripData.days[parseInt(id)] = dayObj;
+      } else {
+        tripData.days.push(dayObj);
+      }
+
+      saveToStorage();
+      closeModal('modalDay');
+      renderAll();
+    }
+
+    function deleteDayItem(index) {
+      if (confirm(`Deseja mesmo remover o dia ${index + 1}?`)) {
+        tripData.days.splice(index, 1);
+        saveToStorage();
+        renderAll();
+      }
+    }
+
+    function loadDefaultItinerary(alertUser = true) {
+      tripData.days = [
+        {
+          dayNumber: "Dia 1",
+          date: "",
+          city: "Roma",
+          status: "Confirmado",
+          headline: "Chegada na Cidade Eterna & Pôr do Sol",
+          morning: "Chegada no aeroporto Fiumicino, check-in no hotel e primeiro café expresso italiano.",
+          afternoon: "Caminhada relaxada pela Piazza Navona e Pantheon. Parada para provar o primeiro gelato.",
+          night: "Jantar romântico no bairro boêmio de Trastevere, com vinho da casa e massa artesanal.",
+          tip: "Vão a pé até a Fontana di Trevi à noite: fica muito mais vazia e iluminada!"
+        },
+        {
+          dayNumber: "Dia 2",
+          date: "",
+          city: "Roma Antiga",
+          status: "Imperdível",
+          headline: "Coliseu, Fórum Romano & Jardim das Laranjeiras",
+          morning: "Tour matinal pelo Coliseu e Fórum Romano com ingressos fura-fila.",
+          afternoon: "Subir até o Giardino degli Aranci (Jardim das Laranjeiras) no Monte Aventino para ver a vista panorâmica.",
+          night: "Jantar no charmoso bairro Monti, experimentando pizza clássica romana de massa fina e crocante.",
+          tip: "Espiar pelo famoso 'buraco da fechadura' dos Cavaleiros de Malta no Aventino."
+        },
+        {
+          dayNumber: "Dia 3",
+          date: "",
+          city: "Vaticano & Trem para Florença",
+          status: "Confirmado",
+          headline: "Basílica de São Pedro & Chegada na Toscana",
+          morning: "Visita à Basílica de São Pedro e subida na cúpula para ver Roma inteira do alto.",
+          afternoon: "Trem de alta velocidade (Frecciarossa) rumo a Florença (apenas 1h35 de viagem).",
+          night: "Chegada em Florença, caminhada até a Ponte Vecchio e brinde com vinho Chianti.",
+          tip: "Ombros e joelhos cobertos no Vaticano: levem um lenço ou pashmina."
+        },
+        {
+          dayNumber: "Dia 4",
+          date: "",
+          city: "Florença",
+          status: "Imperdível",
+          headline: "Duomo, Arte Renascentista & Pôr do Sol Dourado",
+          morning: "Admirar a fachada de mármore verde e rosa do Duomo de Florença e Piazza della Signoria.",
+          afternoon: "Galerias Uffizi ou passeio pelas pontes do Rio Arno com gelato de pistache autêntico.",
+          night: "Piazzale Michelangelo para assistir ao pôr do sol mais romântico da Itália, seguido de Bistecca alla Fiorentina.",
+          tip: "Comprem uma garrafa de vinho e taças descartáveis para levar ao Piazzale Michelangelo."
+        },
+        {
+          dayNumber: "Dia 5",
+          date: "",
+          city: "Toscana (Siena & San Gimignano)",
+          status: "Planejando",
+          headline: "Colinas Verdes, Ciprestes & Degustação de Vinhedos",
+          morning: "Bate-volta pelas colinas toscanas com direito a vinhedos e campos de ciprestes icônicos.",
+          afternoon: "Visitar as torres medievais de San Gimignano e provar o melhor gelato do mundo na Dondoli.",
+          night: "Retorno a Florença e jantar leve com tábua de queijos pecorino, presunto de Parma e azeites toscanos.",
+          tip: "Se alugarem carro por 1 dia, as estradinhas secundárias têm paisagens de cinema."
+        },
+        {
+          dayNumber: "Dia 6",
+          date: "",
+          city: "Veneza",
+          status: "Imperdível",
+          headline: "Canais Românticos, Gôndolas & Piazza San Marco",
+          morning: "Trem de Florença a Veneza Santa Lucia. Primeira visão da saída da estação com o Gran Canale!",
+          afternoon: "Passeio a dois sem mapa pelas ruelas e pontes até a Piazza San Marco.",
+          night: "Passeio de gôndola ao entardecer pelos canais tranquilos e jantar em um aconchegante bacaro veneziano.",
+          tip: "Peçam Cicchetti com Spritz local para uma experiência 100% autêntica."
+        },
+        {
+          dayNumber: "Dia 7",
+          date: "",
+          city: "Veneza (Burano)",
+          status: "Planejando",
+          headline: "As Casinhas Coloridas de Burano & Grande Brinde Final",
+          morning: "Passeio de barco até Burano, a ilha dos pescadores com casas super coloridas e rendas delicadas.",
+          afternoon: "Almoço com frutos do mar frescos e risoto à beira dos canais de Burano.",
+          night: "Noite de despedida em Veneza ouvindo as orquestras clássicas na Piazza San Marco iluminada.",
+          tip: "Tirem muitas fotos nas portas e pontes coloridas de Burano!"
+        }
+      ];
+      if (alertUser) {
+        saveToStorage();
+        renderAll();
+        if (window.confetti) confetti({ particleCount: 50, spread: 60 });
+        alert("Roteiro dos Sonhos de 7 dias carregado!");
+      }
+    }
+
+    // ==============================================
+    // CUSTOS & ORÇAMENTO LOGIC
+    // ==============================================
+    function renderBudget() {
+      const limit = tripData.budget.limit || 4000;
+      const rate = tripData.budget.euroRate || 6.00;
+      
+      let totalSpent = 0;
+      tripData.budget.expenses.forEach(e => {
+        totalSpent += parseFloat(e.amount || 0);
+      });
+
+      const remaining = limit - totalSpent;
+
+      document.getElementById('budgetLimitDisplay').innerText = `€ ${limit.toLocaleString('pt-BR')}`;
+      document.getElementById('budgetLimitBRL').innerText = `Aprox. R$ ${(limit * rate).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+
+      document.getElementById('budgetTotalSpent').innerText = `€ ${totalSpent.toLocaleString('pt-BR')}`;
+      document.getElementById('budgetTotalSpentBRL').innerText = `Aprox. R$ ${(totalSpent * rate).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+
+      const remainingEl = document.getElementById('budgetRemaining');
+      remainingEl.innerText = `€ ${remaining.toLocaleString('pt-BR')}`;
+      if (remaining < 0) {
+        remainingEl.className = "text-3xl font-serif font-bold text-rose-600";
+      } else {
+        remainingEl.className = "text-3xl font-serif font-bold text-olive-600";
+      }
+
+      document.getElementById('displayEuroRate').innerText = rate.toFixed(2);
+      document.getElementById('kpiBudgetSpend').innerText = `€ ${totalSpent.toLocaleString('pt-BR')}`;
+
+      // Render Expenses Table
+      const tbody = document.getElementById('expensesTableBody');
+      tbody.innerHTML = '';
+
+      const filtered = tripData.budget.expenses.filter(item => {
+        if (currentExpenseFilter === 'all') return true;
+        return item.category === currentExpenseFilter;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-8 text-center text-xs text-stone-400">
+              Nenhuma despesa nesta categoria. Clique em "+ Nova Despesa" para registrar passagens, hospedagem ou jantares.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      filtered.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-stone-50/70 transition";
+        const valEuro = parseFloat(item.amount || 0);
+        const valBRL = valEuro * rate;
+        const isPaid = item.status === "Pago";
+
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-medium text-stone-800">${escapeHtml(item.title)}</td>
+          <td class="py-3 px-3 text-xs text-stone-500">${escapeHtml(item.category)}</td>
+          <td class="py-3 px-3 font-semibold text-terracotta-700">€ ${valEuro.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
+          <td class="py-3 px-3 text-xs text-stone-500">R$ ${valBRL.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
+          <td class="py-3 px-3 text-xs text-stone-600">${escapeHtml(item.payer || 'Casal')}</td>
+          <td class="py-3 px-3">
+            <button onclick="toggleExpenseStatus(${index})" class="text-[11px] font-semibold px-2 py-0.5 rounded-full border transition ${isPaid ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-amber-50 text-amber-800 border-amber-200'}">
+              ${isPaid ? '✅ Pago' : '⏳ A Pagar'}
+            </button>
+          </td>
+          <td class="py-3 px-3 text-right no-print">
+            <button onclick="deleteExpense(${index})" class="p-1 text-stone-400 hover:text-rose-600 rounded transition" title="Excluir">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function editBudgetLimit() {
+      const current = tripData.budget.limit || 4000;
+      const val = prompt("Qual é a meta de orçamento total para a viagem em Euros (€)?", current);
+      if (val && !isNaN(val)) {
+        tripData.budget.limit = parseFloat(val);
+        saveToStorage();
+        renderAll();
+      }
+    }
+
+    function editEuroRate() {
+      const current = tripData.budget.euroRate || 6.00;
+      const val = prompt("Informe a cotação estimada de 1 Euro em Reais (R$):", current);
+      if (val && !isNaN(val)) {
+        tripData.budget.euroRate = parseFloat(val);
+        saveToStorage();
+        renderAll();
+      }
+    }
+
+    function filterExpenses(cat) {
+      currentExpenseFilter = cat;
+      const buttons = document.querySelectorAll('.cat-filter');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-stone-800', 'text-white');
+        btn.classList.add('bg-stone-100', 'text-stone-600');
+      });
+      event.target.classList.remove('bg-stone-100', 'text-stone-600');
+      event.target.classList.add('bg-stone-800', 'text-white');
+      renderBudget();
+      lucide.createIcons();
+    }
+
+    function openAddExpenseModal() {
+      document.getElementById('inputExpTitle').value = "";
+      document.getElementById('inputExpAmount').value = "";
+      document.getElementById('inputExpPayer').value = "Dividido (50/50)";
+      document.getElementById('inputExpStatus').value = "Pendente";
+      openModal('modalExpense');
+    }
+
+    function saveExpenseItem() {
+      const title = document.getElementById('inputExpTitle').value.trim();
+      const amount = parseFloat(document.getElementById('inputExpAmount').value);
+      const category = document.getElementById('inputExpCategory').value;
+      const payer = document.getElementById('inputExpPayer').value.trim() || "Casal";
+      const status = document.getElementById('inputExpStatus').value;
+
+      if (!title || isNaN(amount)) {
+        alert("Por favor, preencha a descrição e o valor.");
+        return;
+      }
+
+      tripData.budget.expenses.push({
+        title,
+        amount,
+        category,
+        payer,
+        status
+      });
+
+      saveToStorage();
+      closeModal('modalExpense');
+      renderAll();
+    }
+
+    function toggleExpenseStatus(index) {
+      const exp = tripData.budget.expenses[index];
+      exp.status = (exp.status === "Pago") ? "Pendente" : "Pago";
+      saveToStorage();
+      renderAll();
+    }
+
+    function deleteExpense(index) {
+      if (confirm("Remover esta despesa?")) {
+        tripData.budget.expenses.splice(index, 1);
+        saveToStorage();
+        renderAll();
+      }
+    }
+
+    // ==============================================
+    // GASTRONOMIA LOGIC
+    // ==============================================
+    function renderRestaurants() {
+      const grid = document.getElementById('restaurantsGrid');
+      grid.innerHTML = '';
+
+      if (tripData.restaurants.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-white p-8 rounded-2xl border border-dashed border-stone-300 text-center space-y-3">
+            <div class="w-12 h-12 rounded-full bg-amber-50 text-amber-600 mx-auto flex items-center justify-center">
+              <i data-lucide="utensils" class="w-6 h-6"></i>
+            </div>
+            <h4 class="font-serif font-bold text-lg text-espresso">Nenhum restaurante salvo ainda</h4>
+            <p class="text-xs text-stone-500 max-w-sm mx-auto">Adicione lugares que vocês sonham em ir ou usem as nossas sugestões gastronômicas testadas e aprovadas!</p>
+            <button onclick="loadDefaultFoodWishlist()" class="bg-terracotta-600 hover:bg-terracotta-700 text-white text-xs font-semibold px-4 py-2 rounded-xl transition">
+              Carregar Sugestões
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      tripData.restaurants.forEach((rest, index) => {
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-2xl border border-stone-200 shadow-sm p-4 hover:shadow-md transition flex flex-col justify-between space-y-3";
+        
+        card.innerHTML = `
+          <div class="space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-terracotta-700 bg-terracotta-50 px-2 py-0.5 rounded-md border border-terracotta-100 inline-block mb-1">
+                  ${escapeHtml(rest.city)}
+                </span>
+                <h4 class="font-serif font-bold text-base text-espresso leading-snug">${escapeHtml(rest.name)}</h4>
+              </div>
+              <button onclick="deleteRestaurant(${index})" class="text-stone-400 hover:text-rose-600 transition p-1 no-print">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <div class="text-xs text-stone-500 flex items-center gap-1.5 font-medium">
+              <span>${escapeHtml(rest.type)}</span>
+            </div>
+
+            <div class="bg-stone-50 p-2.5 rounded-xl text-xs text-stone-700 space-y-0.5">
+              <span class="font-semibold text-terracotta-800 block text-[11px]">✨ O que pedir:</span>
+              <p class="leading-relaxed">${escapeHtml(rest.specialty || 'Especialidade da casa e vinho local')}</p>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
+            ${rest.link ? `
+              <a href="${escapeHtml(rest.link)}" target="_blank" rel="noopener noreferrer" class="text-terracotta-600 hover:underline flex items-center gap-1 font-medium text-[11px]">
+                <i data-lucide="external-link" class="w-3 h-3"></i> Ver Mapa / Perfil
+              </a>
+            ` : '<span class="text-stone-300 text-[10px]">Sem link</span>'}
+
+            <label class="flex items-center gap-1.5 cursor-pointer text-stone-600 font-medium text-xs select-none">
+              <input type="checkbox" onchange="toggleRestVisited(${index})" ${rest.visited ? 'checked' : ''} class="w-3.5 h-3.5 text-terracotta-600 rounded focus:ring-0">
+              <span class="${rest.visited ? 'line-through text-stone-400 font-semibold text-emerald-700' : ''}">Já fomos! ❤️</span>
+            </label>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function openAddRestaurantModal() {
+      document.getElementById('inputRestName').value = "";
+      document.getElementById('inputRestCity').value = "";
+      document.getElementById('inputRestType').value = "Trattoria Romântica";
+      document.getElementById('inputRestSpecialty').value = "";
+      document.getElementById('inputRestLink').value = "";
+      openModal('modalRestaurant');
+    }
+
+    function saveRestaurantItem() {
+      const name = document.getElementById('inputRestName').value.trim();
+      const city = document.getElementById('inputRestCity').value.trim() || "Itália";
+      const type = document.getElementById('inputRestType').value;
+      const specialty = document.getElementById('inputRestSpecialty').value.trim();
+      const link = document.getElementById('inputRestLink').value.trim();
+
+      if (!name) {
+        alert("Por favor, preencha o nome do local.");
+        return;
+      }
+
+      tripData.restaurants.push({
+        name,
+        city,
+        type,
+        specialty,
+        link,
+        visited: false
+      });
+
+      saveToStorage();
+      closeModal('modalRestaurant');
+      renderAll();
+    }
+
+    function toggleRestVisited(index) {
+      tripData.restaurants[index].visited = !tripData.restaurants[index].visited;
+      saveToStorage();
+      renderAll();
+      if (tripData.restaurants[index].visited) {
+        playTaskCompleteSound();
+        if (window.confetti) {
+          confetti({ particleCount: 35, spread: 55, origin: { y: 0.7 } });
+        }
+      }
+    }
+
+    function deleteRestaurant(index) {
+      if (confirm("Remover este restaurante?")) {
+        tripData.restaurants.splice(index, 1);
+        saveToStorage();
+        renderAll();
+      }
+    }
+
+    function loadDefaultFoodWishlist(alertUser = true) {
+      tripData.restaurants = [
+        {
+          name: "Trattoria Da Enzo al 29",
+          city: "Roma (Trastevere)",
+          type: "Trattoria Romântica",
+          specialty: "A melhor Carbonara autêntica, Cacio e Pepe e a alcachofra 'Carciofo alla Giudia'.",
+          link: "",
+          visited: false
+        },
+        {
+          name: "Frigidarium",
+          city: "Roma (Perto da Piazza Navona)",
+          type: "Gelateria Artesanal",
+          specialty: "Gelato artesanal cremoso mergulhado na casquinha de chocolate preto ou branco grátis!",
+          link: "",
+          visited: false
+        },
+        {
+          name: "All'Antico Vinaio",
+          city: "Florença",
+          type: "Focaccia & Panini",
+          specialty: "Focaccia recheada na hora com presunto toscano, creme de trufas e queijo stracchino.",
+          link: "",
+          visited: false
+        },
+        {
+          name: "Trattoria ZaZa",
+          city: "Florença (Piazza del Mercato)",
+          type: "Trattoria Romântica",
+          specialty: "A famosa Bistecca alla Fiorentina suculenta e massas trufadas divinas em ambiente rústico.",
+          link: "",
+          visited: false
+        },
+        {
+          name: "Gelateria Dondoli",
+          city: "San Gimignano (Toscana)",
+          type: "Gelateria Artesanal",
+          specialty: "Eleita melhor gelateria do mundo: prove o sabor 'Crema di Santa Fina' (açafrão e pinhão).",
+          link: "",
+          visited: false
+        },
+        {
+          name: "Cantina Do Mori",
+          city: "Veneza (Rialto)",
+          type: "Wine Bar & Aperitivo",
+          specialty: "O bacaro mais antigo de Veneza (desde 1462!): vinhos no balcão e cicchetti deliciosos.",
+          link: "",
+          visited: false
+        }
+      ];
+      if (alertUser) {
+        saveToStorage();
+        renderAll();
+        if (window.confetti) confetti({ particleCount: 50, spread: 60 });
+        alert("Sugestões gastronômicas clássicas adicionadas com sucesso!");
+      }
+    }
+
+    // ==============================================
+    // CHECKLIST DE MALAS LOGIC
+    // ==============================================
+    const checklistCatMeta = {
+      documentos: { title: "📄 Documentos & Reservas", desc: "Passaportes, seguro e bilhetes" },
+      mala_dele: { title: "👔 Mala Dele", desc: "Roupas confortáveis e elegantes" },
+      mala_dela: { title: "👗 Mala Dela", desc: "Looks românticos, vestidos e lenços" },
+      farmacia_tech: { title: "💊 Farmácia & Eletrônicos", desc: "Remédios, adaptadores e cabos" }
+    };
+
+    function renderChecklist() {
+      const container = document.getElementById('checklistColumnsContainer');
+      container.innerHTML = '';
+
+      Object.keys(checklistCatMeta).forEach(catKey => {
+        const meta = checklistCatMeta[catKey];
+        const items = tripData.checklist[catKey] || [];
+        const completedCount = items.filter(i => i.done).length;
+        const total = items.length;
+        const pct = total === 0 ? 0 : Math.round((completedCount / total) * 100);
+
+        const col = document.createElement('div');
+        col.className = "bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3";
+        
+        let itemsHtml = '';
+        if (items.length === 0) {
+          itemsHtml = `<div class="text-xs text-stone-400 py-3 italic">Nenhum item adicionado ainda.</div>`;
+        } else {
+          items.forEach((item, index) => {
+            itemsHtml += `
+              <div class="flex items-center justify-between gap-2 py-1.5 border-b border-stone-100 last:border-0 hover:bg-stone-50 px-1 rounded transition">
+                <label class="flex items-center gap-2.5 cursor-pointer text-xs select-none flex-1">
+                  <input type="checkbox" onchange="toggleChecklistItem('${catKey}', ${index})" ${item.done ? 'checked' : ''} class="w-4 h-4 text-terracotta-600 rounded focus:ring-0">
+                  <span class="${item.done ? 'line-through text-stone-400' : 'text-stone-700 font-medium'}">${escapeHtml(item.text)}</span>
+                </label>
+                <button onclick="deleteChecklistItem('${catKey}', ${index})" class="text-stone-300 hover:text-rose-500 transition p-1 no-print">
+                  <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            `;
+          });
+        }
+
+        col.innerHTML = `
+          <div class="flex items-center justify-between border-b border-stone-100 pb-2.5">
+            <div>
+              <h4 class="font-serif font-bold text-base text-espresso">${meta.title}</h4>
+              <p class="text-[11px] text-stone-400">${meta.desc}</p>
+            </div>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full ${pct === 100 ? 'bg-emerald-100 text-emerald-800' : 'bg-stone-100 text-stone-600'}">
+              ${completedCount}/${total} (${pct}%)
+            </span>
+          </div>
+
+          <div class="w-full bg-stone-100 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-terracotta-500 h-1.5 transition-all duration-300" style="width: ${pct}%"></div>
+          </div>
+
+          <div class="space-y-0.5">
+            ${itemsHtml}
+          </div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
+    function openAddChecklistItemModal() {
+      document.getElementById('inputChecklistName').value = "";
+      openModal('modalChecklist');
+    }
+
+    function saveChecklistItem() {
+      const text = document.getElementById('inputChecklistName').value.trim();
+      const cat = document.getElementById('inputChecklistCategory').value;
+
+      if (!text) {
+        alert("Preencha o nome do item.");
+        return;
+      }
+
+      if (!tripData.checklist[cat]) tripData.checklist[cat] = [];
+      tripData.checklist[cat].push({ text, done: false });
+
+      saveToStorage();
+      closeModal('modalChecklist');
+      renderAll();
+    }
+
+    function toggleChecklistItem(cat, index) {
+      tripData.checklist[cat][index].done = !tripData.checklist[cat][index].done;
+      if (tripData.checklist[cat][index].done) {
+        playTaskCompleteSound();
+        if (window.confetti) {
+          confetti({ particleCount: 30, spread: 50, origin: { y: 0.7 } });
+        }
+      }
+      saveToStorage();
+      renderAll();
+    }
+
+    function deleteChecklistItem(cat, index) {
+      tripData.checklist[cat].splice(index, 1);
+      saveToStorage();
+      renderAll();
+    }
+
+    function loadDefaultChecklist(alertUser = true) {
+      tripData.checklist = {
+        documentos: [
+          { text: "Passaportes com validade mínima de 6 meses", done: false },
+          { text: "Seguro Viagem Internacional (cobertura mínima de € 30.000)", done: false },
+          { text: "Passagens aéreas (ida e volta) impressas ou no celular", done: false },
+          { text: "Comprovantes de reserva dos hotéis / Airbnb", done: false },
+          { text: "Cartão de crédito internacional habilitado para o exterior", done: false },
+          { text: "CNH + PID (se forem alugar carro na Toscana)", done: false }
+        ],
+        mala_dele: [
+          { text: "Tênis confortável para caminhar muito em paralelepípedos", done: false },
+          { text: "Camisas leves de linho para almoços e jantares", done: false },
+          { text: "Calças confortáveis (evitar bermuda muito curta em basílicas)", done: false },
+          { text: "Jaqueta leve / corta-vento para as noites frescas", done: false },
+          { text: "Óculos de sol e perfume favorito", done: false }
+        ],
+        mala_dela: [
+          { text: "Vestidos fluidos e românticos para fotos inesquecíveis", done: false },
+          { text: "Lenço leve ou pashmina (essencial para cobrir ombros no Vaticano)", done: false },
+          { text: "Calçados muito confortáveis sem salto fino (ruas antigas)", done: false },
+          { text: "Bolsa transversal segura com zíper anti-furto", done: false },
+          { text: "Maquiagens leves e protetor solar", done: false }
+        ],
+        farmacia_tech: [
+          { text: "Adaptador de tomada padrão europeu / tipo L italiano", done: false },
+          { text: "Powerbank (bateria portátil) para não faltar bateria para fotos", done: false },
+          { text: "Farmacinha básica (analgésico, antialérgico, curativos para pés)", done: false },
+          { text: "Chip internacional ou eSIM ativado com internet ilimitada", done: false },
+          { text: "Câmera ou fones de ouvido para as viagens de trem", done: false }
+        ]
+      };
+
+      if (alertUser) {
+        saveToStorage();
+        renderAll();
+        if (window.confetti) confetti({ particleCount: 50, spread: 60 });
+        alert("Checklist completo para a Europa adicionado com sucesso!");
+      }
+    }
+
+    // ==============================================
+    // KPI RECALCULATION
+    // ==============================================
+    function updateKPIs() {
+      // Days KPI
+      const daysCount = tripData.days.length;
+      document.getElementById('kpiDaysCount').innerText = `${daysCount} ${daysCount === 1 ? 'Dia' : 'Dias'}`;
+
+      // History Count KPI
+      document.getElementById('kpiHistoryCount').innerText = `${tripData.historyLog.length} Marcos`;
+
+      // Budget Spent KPI
+      let totalSpent = 0;
+      tripData.budget.expenses.forEach(e => {
+        totalSpent += parseFloat(e.amount || 0);
+      });
+      document.getElementById('kpiBudgetSpend').innerText = `€ ${totalSpent.toLocaleString('pt-BR')}`;
+    }
+
+    // Sanitization helper
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // ==============================================
+    // ITALIAN MUSIC PLAYER (LOOPING & CONTROLS)
+    // ==============================================
+    let isMusicPlaying = false;
+    let userHasPausedManually = false;
+    let musicVolume = 0.7;
+
+    function getAudioEl() {
+      return document.getElementById('italianAudio');
+    }
+
+    function initMusicPlayer() {
+      const audioEl = getAudioEl();
+      if (!audioEl) return;
+      
+      audioEl.loop = true;
+      audioEl.volume = musicVolume;
+
+      // Update seek bar and timers
+      audioEl.addEventListener('timeupdate', () => {
+        const cur = audioEl.currentTime || 0;
+        const dur = audioEl.duration || 0;
+        const curEl = document.getElementById('audioCurrentTime');
+        const durEl = document.getElementById('audioTotalDuration');
+        const barEl = document.getElementById('audioProgressBar');
+
+        if (curEl) curEl.innerText = formatAudioTime(cur);
+        if (dur > 0 && durEl) {
+          durEl.innerText = formatAudioTime(dur);
+          const pct = (cur / dur) * 100;
+          if (barEl) barEl.style.width = `${pct}%`;
+        }
+      });
+
+      audioEl.addEventListener('loadedmetadata', () => {
+        const dur = audioEl.duration || 0;
+        const durEl = document.getElementById('audioTotalDuration');
+        if (dur > 0 && durEl) {
+          durEl.innerText = formatAudioTime(dur);
+        }
+      });
+
+      audioEl.addEventListener('play', () => {
+        isMusicPlaying = true;
+        updateMusicUI();
+      });
+
+      audioEl.addEventListener('pause', () => {
+        isMusicPlaying = false;
+        updateMusicUI();
+      });
+
+      // Try autoplay immediately
+      const playPromise = audioEl.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isMusicPlaying = true;
+          updateMusicUI();
+        }).catch(() => {
+          // If browser policy prevents unmuted autoplay before gesture, start on first click
+          const startOnFirstGesture = () => {
+            if (!userHasPausedManually && !isMusicPlaying) {
+              audioEl.play().then(() => {
+                isMusicPlaying = true;
+                updateMusicUI();
+              }).catch(() => {});
+            }
+            document.removeEventListener('click', startOnFirstGesture);
+          };
+          document.addEventListener('click', startOnFirstGesture, { once: true });
+        });
+      }
+    }
+
+    function formatAudioTime(seconds) {
+      if (!seconds || isNaN(seconds)) return "0:00";
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+
+    function toggleMusicPlay() {
+      const audioEl = getAudioEl();
+      if (!audioEl) return;
+
+      if (isMusicPlaying) {
+        audioEl.pause();
+        userHasPausedManually = true;
+      } else {
+        userHasPausedManually = false;
+        audioEl.play().catch(e => {
+          console.log("Audio play gesture required:", e);
+        });
+      }
+      updateMusicUI();
+    }
+
+    function seekAudio(e) {
+      const audioEl = getAudioEl();
+      if (!audioEl || !audioEl.duration) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const width = rect.width;
+      const seekRatio = Math.max(0, Math.min(1, clickX / width));
+      audioEl.currentTime = seekRatio * audioEl.duration;
+    }
+
+    function setMusicVolume(val) {
+      musicVolume = parseFloat(val);
+      const audioEl = getAudioEl();
+      if (audioEl) {
+        audioEl.volume = musicVolume;
+      }
+      const pct = Math.round(musicVolume * 100);
+      const disp = document.getElementById('musicVolumeDisplay');
+      if (disp) disp.innerText = `${pct}%`;
+    }
+
+    function updateMusicUI() {
+      // Equalizer animation
+      const eq = document.getElementById('musicEqualizer');
+      if (eq) {
+        if (isMusicPlaying) {
+          eq.classList.add('eq-playing');
+        } else {
+          eq.classList.remove('eq-playing');
+        }
+      }
+
+      // Play/Pause icon buttons
+      const floatPlayIcon = document.getElementById('floatPlayIcon');
+      const topMusicIcon = document.getElementById('topMusicIcon');
+      const topMusicLabel = document.getElementById('topMusicLabel');
+      const modalBtnText = document.getElementById('modalTogglePlayText');
+
+      if (isMusicPlaying) {
+        if (floatPlayIcon) floatPlayIcon.setAttribute('data-lucide', 'pause');
+        if (topMusicIcon) topMusicIcon.setAttribute('data-lucide', 'pause');
+        if (topMusicLabel) topMusicLabel.innerText = "Pausar Música";
+        if (modalBtnText) modalBtnText.innerText = "Pausar";
+      } else {
+        if (floatPlayIcon) floatPlayIcon.setAttribute('data-lucide', 'play');
+        if (topMusicIcon) topMusicIcon.setAttribute('data-lucide', 'play');
+        if (topMusicLabel) topMusicLabel.innerText = "Tocar Música";
+        if (modalBtnText) modalBtnText.innerText = "Tocar Música";
+      }
+
+      lucide.createIcons();
+    }
+
+    function openMusicLounge() {
+      openModal('modalMusicLounge');
+    }
+
+    function switchMusicLoungeTab(tabId) {
+      const tabs = ['native', 'spotify', 'apps'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`musicTabBtn-${t}`);
+        const content = document.getElementById(`musicLoungeContent-${t}`);
+        if (!btn || !content) return;
+        if (t === tabId) {
+          btn.className = "flex-1 py-2 px-3 rounded-lg bg-white text-espresso shadow-sm transition flex items-center justify-center gap-1.5 font-bold";
+          content.classList.remove('hidden');
+        } else {
+          btn.className = "flex-1 py-2 px-3 rounded-lg text-stone-600 hover:text-espresso transition flex items-center justify-center gap-1.5";
+          content.classList.add('hidden');
+        }
+      });
+      lucide.createIcons();
+    }
+
+    // Startup
+    window.addEventListener('DOMContentLoaded', () => {
+      initApp();
+      initMusicPlayer();
+      updateMusicUI();
+    });
+  </script>
+</body>
+</html>
